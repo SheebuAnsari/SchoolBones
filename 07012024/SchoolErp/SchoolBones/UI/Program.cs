@@ -39,5 +39,9 @@ namespace UI
 
             Console.ReadLine();
         }
+        public static void TEST()
+        {
+            Console.WriteLine("This is test method.");
+        }
     }
 }
