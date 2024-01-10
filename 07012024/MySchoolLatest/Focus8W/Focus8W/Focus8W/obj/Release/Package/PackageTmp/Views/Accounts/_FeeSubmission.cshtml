@@ -1,0 +1,56 @@
+﻿
+<div class="container-fluid">
+    @*<h2>FeeSubmission</h2>*@
+    <div class="row">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand">Navbar</a>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="btn btn-outline-success" type="button" onclick="BackToFeeSubmission();" value="Back" />
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <label class="control-label">Enrollment No</label>
+                <input id="txtEno" type="text" class="form-control" value="2" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Roll No</label>
+                <input id="txtRno" type="text" class="form-control" value="0" />
+            </div>
+            <button class="btn btn-outline-primary" type="button" onclick="LoadFeeDetails()">Load Student Details</button>
+        </div>
+    </div>
+</div>
+
+
+@*<script>
+    function LoadFeeDetails() {
+        debugger
+      var txtEnrollmentNo = parseInt(document.getElementById("txtEno").value);
+        var txtRollNo = parseInt(document.getElementById("txtRno").value);
+
+        var url = "@Url.Action("LoadFeeDetails", "Accounts")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            data: {
+                iEnrollmentno: txtEnrollmentNo,
+                iRollno: txtRollNo
+            },
+            datatype: "html",
+            success: function (data){
+                successLoadFeeDetails(true, data);
+            }
+        })
+    }
+    function successLoadFeeDetails(bSuccess, data) {
+        $("#dvAccounts").html(data);
+    }
+
+</script>*@

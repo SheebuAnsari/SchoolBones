@@ -1,0 +1,294 @@
+﻿@using SchoolBones
+@using SchoolBones.DataStructs
+@using SchoolBones.Enums
+
+@model Registration
+@{
+    Registration oRegistration = null;
+
+    oRegistration = Model;
+}
+
+@if (oRegistration != null)
+{
+    <input type="hidden" id="hdnRegId" value="@oRegistration.RegistrationId" />
+    if (oRegistration.UserType == 3)//AddStudent
+    {
+        <div class="row">
+            @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Teacher, Value: (int)SubModule.AddStudent))
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Student Name</label>
+                        <input type="text" class="form-control" id="txtName" value="@oRegistration.UserName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input id="txtEmail" type="text" class="form-control" value="@oRegistration.LoginName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <input id="txtPassword" type="text" class="form-control" value="@oRegistration.UserPassword" readonly />
+                    </div>
+
+
+                    @*Save below control value in Teacher table*@
+
+                    <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <input id="txtFirstName" type="text" class="form-control" value="@oRegistration.UserName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Last Name</label>
+                        <input id="txtLastName" type="text" class="form-control" value="@oRegistration.UserName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <input id="txtAddress" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">City</label>
+                        <input id="txtCity" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Contact</label>
+                        <input id="txtContact" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Admission In Class</label>
+                        <input id="txtAdmissionInClass" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">DOB</label>
+                        @*<input id="txtDOB" type="text" class="form-control" />*@
+                        <input id="txtDOB" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" min="2000-01-01" max="2020-12-31" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Admission Date</label>
+                        @*<input id="txtAdmissionDate" type="text" class="form-control" />*@
+                        <input id="txtAdmissionDate" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" min="2020-01-01" max="2023-12-31" />
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="chkIsActive" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Active
+                        </label>
+                    </div>
+
+                    <input class="btn btn-primary" type="button" value="Save" onclick="StudentAdmission()">
+                </div>
+
+                <div class="col-md-6">
+                    <div id="PhotoSection" style="display:none">
+                        <label>Photo</label>
+                        <input type="file" id="userphoto" onchange="uploadImage(this)" />
+                        @*<input type="file" id="userphoto" onchange="uploadImage(this,'userimageinfo')" />*@
+                    </div>
+                    <div class="hidden-xs col-sm-4 col-md-5" id="imageSection">
+                        @{
+                            if (false)
+                            {
+                                @*var base64 = Convert.ToBase64String(Model.personalInfo.Photo);
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    <img id="userImageInfo" src="@imgSrc" alt="No Photo" height="70px" onclick="UPDATEUSERINFO.triggerOpen()" />*@
+                            }
+                            else
+                            {
+                                <img id="userImageInfo" src="~/Image/QR.png" alt="No Photo" onclick="triggerOpen()" style="border: 25px ridge;height:50%" />
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+else if (oRegistration.UserType == 2)//AddTeacher
+{
+    <div class="row">
+        @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Admin, Value: (int)SubModule.AddTeacher))
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" style="display:none">
+                    <label class="control-label">Registration No</label>
+                    <input id="txtRegNo" type="text" class="form-control" value="Reg no 123" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Teacher Name</label>
+                    <input type="text" class="form-control" id="txtName" value="@oRegistration.UserName" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input id="txtEmail" type="text" class="form-control" value="@oRegistration.LoginName" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Password</label>
+                    <input id="txtPassword" type="text" class="form-control" value="@oRegistration.UserPassword" readonly />
+                </div>
+
+
+                @*Save below control value in Teacher table*@
+                <div class="form-group">
+                    <label class="control-label">Mobile</label>
+                    <input id="txtMobile" type="text" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Qualification</label>
+                    <input id="txtQualification" type="text" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">JoiningDate</label>
+                    @*<input id="txtJoinDate" type="text" class="form-control" />*@
+                    <input id="txtJoinDate" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" @*min="2020-01-01" max="2023-12-31"*@ />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Experiance</label>
+                    <input id="txtExp" type="text" class="form-control" />
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="chkActive" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Active
+                    </label>
+                </div>
+
+                <input class="btn btn-primary" type="button" value="Save" onclick="ADMINCOMMONJS.SaveTeacherDetails()">
+            </div>
+        </div>
+    </div>
+    }
+}
+
+
+<script>
+    function StudentAdmission() {
+        debugger;
+        var photo = null;
+        var iRegId = document.getElementById("hdnRegId").value;
+        var txtFirstName = document.getElementById("txtFirstName");
+        var txtLastName = document.getElementById("txtLastName");
+        var txtAddress = document.getElementById("txtAddress");
+        var txtCity = document.getElementById("txtCity");
+        var txtContact = document.getElementById("txtContact");
+        var txtAdmissionInClass = document.getElementById("txtAdmissionInClass");
+        var chkIsActive = document.getElementById("chkIsActive");
+        //var txtAdmissionDate = document.getElementById("txtAdmissionDate");
+        var sSelectedDate = document.getElementById("txtAdmissionDate").value;
+        var iAdmissionDate = FDate.convertDateToInt(sSelectedDate, "yyyy-mm-dd", 0);
+        var stxtDOB = document.getElementById("txtDOB").value;
+        var iDOB = FDate.convertDateToInt(stxtDOB, "yyyy-mm-dd", 0);
+        if ($("#userImageInfo").attr("src").indexOf("base64") > 0) {
+            photo = $("#userImageInfo").attr("src").substring($("#userImageInfo").attr("src").indexOf("base64,") + 7);
+        }
+
+        var oAdmissionDetails = {};
+        oAdmissionDetails.RegistrationId = iRegId;
+        oAdmissionDetails.StdName = txtLastName.value;
+        oAdmissionDetails.FirstName = txtFirstName.value;
+        oAdmissionDetails.LastName = txtLastName.value;
+        oAdmissionDetails.Address = txtAddress.value;
+        oAdmissionDetails.City = txtCity.value;
+        oAdmissionDetails.Contact = parseInt(txtContact.value);
+        oAdmissionDetails.AdmissionInClass = parseInt(txtAdmissionInClass.value);
+        oAdmissionDetails.DOB = iDOB;
+        oAdmissionDetails.IsActive = chkIsActive.checked;
+        oAdmissionDetails.AdmissionDate = iAdmissionDate;
+        oAdmissionDetails.StudentImage = photo;
+
+        var url = "@Url.Action("StudentAdmission", "Teacher")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: { oAdmissionDetails: oAdmissionDetails },
+            success: function (data) {
+                debugger
+                successStudentAdmission(true, data);
+            }
+        });
+    }
+    function successStudentAdmission(success, data) {
+        debugger;
+        if (data.iStatus > 0) {
+            COMMONMETHODS.ShowToastAsAlert("Saved");
+        } else {
+            COMMONMETHODS.ShowToastAsAlert("Failed");
+        }
+    }
+
+
+
+    function triggerOpen() {
+        //debugger;
+        $("#userphoto").trigger('click');
+    }
+    //function uploadImage(ele, id) {
+    function uploadImage(ele) {
+        debugger;
+        if (ele.files && ele.files[0]) {
+            var fileType = ele.files[0].type;
+            if (fileType == "image/png" || fileType == "image/gif" || fileType == "image/jpg" || fileType == "image/jpeg") {
+                if (ele.files[0].size < 100000) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        debugger
+                        $('#userImageInfo').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(ele.files[0]);
+
+
+
+                    //var reader = new FileReader();
+                    //reader.onload = function (e) {
+                    //    $('#' + id).attr('src', e.target.result);
+                    //}
+                    //reader.readAsDataURL(ele.files[0]);
+                    //$(ele).css("color", "#000");
+                }
+                else {
+                    $(ele).css("color", "red");
+                    //COMMON.prototype.showMessage(msgs.msgFilesizeExceed, "Error");
+                    alert("Failed due to file size.");
+                }
+            }
+            else {
+                $(ele).css("color", "red");
+                //COMMON.prototype.showMessage(msgs.msgInvalidFileType, "Error");
+                alert("Failed due to file type.");
+            }
+        }
+    }
+
+
+
+   
+
+    const picker = document.getElementById('txtAdmissionDate');
+    picker.addEventListener('input', function (e) {
+        var day = new Date(this.value).getUTCDay();
+        if ([6, 0].includes(day)) {
+            e.preventDefault();
+            this.value = '';
+            alert('Weekends not allowed');
+        }
+    });
+</script>

@@ -1,0 +1,160 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+
+@model Registration
+@{
+    Registration oRegistration = null;
+
+    oRegistration = Model;
+}
+
+@Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Teacher, Value: (int)SubModule.AddStudent))
+
+<div class="col-md-8">
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Registration Details
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="form-group">
+                        <label class="control-label">Student Name</label>
+                        <input type="text" class="form-control" id="txtName" value="@oRegistration.UserName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input id="txtEmail" type="text" class="form-control" value="@oRegistration.LoginName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <input id="txtPassword" type="text" class="form-control" value="@oRegistration.UserPassword" readonly />
+                    </div>
+
+
+                    @*Save below control value in Teacher table*@
+
+                    <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <input id="txtFirstName" type="text" class="form-control" value="@oRegistration.UserName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Last Name</label>
+                        <input id="txtLastName" type="text" class="form-control" value="@oRegistration.UserName" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <input id="txtAddress" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">City</label>
+                        <input id="txtCity" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Contact</label>
+                        <input id="txtContact" type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Admission In Class</label>
+                        <input id="txtAdmissionInClass" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">DOB</label>
+                        @*<input id="txtDOB" type="text" class="form-control" />*@
+                        <input id="txtDOB" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" min="2000-01-01" max="2020-12-31" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Admission Date</label>
+                        @*<input id="txtAdmissionDate" type="text" class="form-control" />*@
+                        <input id="txtAdmissionDate" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" min="2020-01-01" max="2023-12-31" />
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="chkIsActive" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Active
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Personal Details
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <div class="form-group">
+                        <label class="control-label">School Name</label>
+                        <input type="text" class="form-control" id="txtSchoolName" value="Madarsa Talimul Quraan" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Proprietor</label>
+                        <input type="text" class="form-control" id="txtProprietor" value="Salman" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Establish</label>
+                        <input type="text" class="form-control" id="txtEstablish" value="Establish : 1001" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <input type="text" class="form-control" id="txtAddress" value="Jinhauli" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Contact</label>
+                        <input type="text" class="form-control" id="txtContact" value="9865896" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Education Details
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div id="PhotoSection" style="display:none">
+        <label>Photo</label>
+        <input type="file" id="userphoto" onchange="ADMISSION.uploadImage(this)" />
+        @*<input type="file" id="userphoto" onchange="ADMISSION.uploadImage(this,'userimageinfo')" />*@
+    </div>
+    <div class="hidden-xs col-sm-4 col-md-5" id="imageSection">
+        @{
+            if (false)
+            {
+                @*var base64 = Convert.ToBase64String(Model.personalInfo.Photo);
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    <img id="userImageInfo" src="@imgSrc" alt="No Photo" height="70px" onclick="ADMISSION.triggerOpen()" />*@
+            }
+            else
+            {
+                <img id="userImageInfo" src="~/Image/QR.png" alt="No Photo" onclick="ADMISSION.triggerOpen()" style="border: 25px ridge;height:500px; width:400px" />
+            }
+        }
+    </div>
+
+</div>

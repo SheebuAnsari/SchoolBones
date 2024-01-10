@@ -1,0 +1,581 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model DoubleInt
+@{
+    DoubleInt oInputs = null;
+
+    oInputs = Model;
+
+    Modules eModules = (Modules)oInputs.Id;
+    SubModule eSubModule = (SubModule)oInputs.Value;
+
+    TimeTableLayout oTimeTableLayout = null;
+    if (TempData["Layout"] != null)
+    {
+        oTimeTableLayout = TempData["Layout"] as TimeTableLayout;
+    }
+}
+
+<div class="row">
+    <div class="row">
+        @Html.Partial("_HeaderNavigation", oInputs)
+    </div>
+
+    <div class="row">
+        @{
+            if (eModules == Modules.Admin)
+            {
+                if (eSubModule == SubModule.AddTeacher)
+                {
+                    @*<div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Enter Registraton No</label>
+                        <input id="txtRegNo" type="text" class="form-control"/>
+                    </div>*@
+            
+
+                }
+                else if (eSubModule == SubModule.TimeTable)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Layout</label>
+                        <select id="ddlLayout" class="form-select">
+                            <option value="-1">--Select Layout--</option>
+                            <option value="1">Jan-Apr</option>
+                            <option value="2">May-Aug</option>
+                            <option value="3">Sep-Dec</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            @*<option value='-1'>--Select Class--</option>*@
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option selected value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.ActiveTeachers)
+                {
+
+                }
+                else if (eSubModule == SubModule.InActiveTeachers)
+                {
+
+                }
+                else if (eSubModule == SubModule.IDCardOfTeachers)
+                {
+
+                }
+                else if (eSubModule == SubModule.IDCardOfStudents)
+                {
+
+                }
+                else if (eSubModule == SubModule.TakeTeacherAttendanceInputs || eSubModule == SubModule.LoadTeacherAttendanceInputs)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Month</label>
+                        <select id="ddlMonth" class="form-select" onchange="COMMONINPUT.LoadCalendar(this)">
+                            <option value="-1">--Select Month--</option>
+                            <option value="1">Janaury</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9" selected>September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Year</label>
+                        <select id="ddlYear" class="form-select">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option selected value="2023">2023</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.Registration)
+                {
+
+                }
+                else if (eSubModule == SubModule.AllTeachers)
+                {
+
+                }
+            }
+            else if (eModules == Modules.Teacher)
+            {
+                if (eSubModule == SubModule.AddStudent)
+                {
+
+                }
+                else if (eSubModule == SubModule.AllStudent)
+                {
+
+                }
+                else if (eSubModule == SubModule.ActiveStudent)
+                {
+
+                }
+                else if (eSubModule == SubModule.InActiveStudent)
+                {
+
+                }
+                else if (eSubModule == SubModule.TakeAttendanceInputs || eSubModule == SubModule.LoadAttendanceInputs)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            @*<option value='-1'>--Select Class--</option>*@
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option selected value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Month</label>
+                        <select id="ddlMonth" class="form-select" onchange="COMMONINPUT.LoadCalendar(this)">
+                            <option value="-1">--Select Month--</option>
+                            <option value="1">Janaury</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9" selected>September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Year</label>
+                        <select id="ddlYear" class="form-select">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option selected value="2023">2023</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.CreateMarksheet || eSubModule == SubModule.LoadSemesterMarksheet)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            @*<option value='-1'>--Select Class--</option>*@
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option selected value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Year</label>
+                        <select id="ddlYear" class="form-select">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option selected value="2023">2023</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Exam Type</label>
+                        <select id="ddlExamType" class="form-select">
+                            <option selected value="1">Test</option>
+                            <option value="2">Half Yearly</option>
+                            <option value="3">Annual</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.CreateDMarksheet)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            @*<option value='-1'>--Select Class--</option>*@
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option selected value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Year</label>
+                        <select id="ddlYear" class="form-select">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option selected value="2023">2023</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.AddSubjects)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            @*<option value='-1'>--Select Class--</option>*@
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option selected value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.DefinedMaximumMarks)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            @*<option value='-1'>--Select Class--</option>*@
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option selected value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.DisplayMarksheet)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Select Year Dummy</label>
+                        <select id="ddlClass" class="form-select">
+                            <option value='1'>2020</option>
+                            <option value='2'>2021</option>
+                            <option value='3'>2022</option>
+                            <option selected value='4'>2023</option>
+                        </select>
+                    </div>
+                }
+                else if (eSubModule == SubModule.Registration)
+                {
+
+                }
+            }
+            else if (eModules == Modules.Student)
+            {
+
+            }
+            else if (eModules == Modules.Account)
+            {
+                if (eSubModule == SubModule.FeeSubmission)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Enrollment No</label>
+                        <input id="txtEno" type="text" class="form-control" value="15" />
+                    </div>
+                    <div class="mb-3" hidden>
+                        <label for="exampleFormControlInput1" class="form-label">Roll No</label>
+                        <input id="txtRno" type="text" class="form-control" value="0" />
+                    </div>
+                }
+                else if (eSubModule == SubModule.ClasswiseStudents)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Year</label>
+                        <select id="ddlYear" class="form-select">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023" selected>2023</option>
+                        </select>
+                    </div>
+
+                    <div id="dvLoadStudents">
+                        @*@Html.Partial("_FeesStructure", null)*@
+                    </div>
+                }
+                else if (eSubModule == SubModule.FeesStructure)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Year</label>
+                        <select id="ddlYear" class="form-select" onchange="ACCOUNT.LoadFeesStructure(this)">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                        </select>
+                    </div>
+                    <div id="dvFeesStructure">
+                        @*@Html.Partial("_FeesStructure", null)*@
+                    </div>
+                }
+                else if (eSubModule == SubModule.DefineMontlySalary)
+                {
+                    <div class="mb-3">
+                        <select id="ddlYear" class="form-select" onchange="ACCOUNT.DefineMontlySalary(this)">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                        </select>
+                    </div>
+                    <div id="dvDefineSalary">
+                    </div>
+                }
+                else if (eSubModule == SubModule.LoadSalary)
+                {
+                    <div class="mb-3">
+                        <select id="ddlMonth" class="form-select" onchange="COMMONINPUT.LoadCalendar(this)">
+                            <option value="-1">--Select Month--</option>
+                            <option value="1">Janaury</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9" selected>September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <select id="ddlYear" class="form-select" onchange="ACCOUNT.DefineMontlySalary(this)">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023" selected>2023</option>
+                        </select>
+                    </div>
+
+                    <div id="dvSalaryDetails">
+                    </div>
+                }
+                else if (eSubModule == SubModule.LoadFeeCollection)
+                {
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Class</label>
+                        <select id="ddlClass" class="form-select">
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <select id="ddlMonth" class="form-select" onchange="COMMONINPUT.LoadCalendar(this)">
+                            <option value="-1">--Select Month--</option>
+                            <option value="1">Janaury</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9" selected>September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <select id="ddlYear" class="form-select" onchange="ACCOUNT.DefineMontlySalary(this)">
+                            <option value="-1">--Year--</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023" selected>2023</option>
+                        </select>
+                    </div>
+                    <div id="dvLoadFeeCollection">
+                    </div>
+                }
+            }
+
+            #region FooterButtons
+            <div class="mb-3">
+                @{
+                    if (eModules == Modules.Admin)
+                    {
+                        if (eSubModule == SubModule.AddTeacher)
+                        {
+                        }
+                        else if (eSubModule == SubModule.ActiveTeachers)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.InActiveTeachers)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.IDCardOfTeachers)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.IDCardOfStudents)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.TakeTeacherAttendanceInputs)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="COMMONINPUT.LoadCalendar()">Load Calendar</button>
+
+                            <div id="dvCalendar" style="display:none;">
+                                <label for="exampleFormControlInput1" class="form-label">Calendar</label>
+                                <input type="date" class="form-control mb-3" id="dtAttendaneDate" placeholder="yyyy-mm-dd" @*value="" min="2023-09-08" max="2030-12-31"*@ />
+                                <button class="btn btn-outline-primary" type="button" onclick="ATTENDANCE.OpenAttendanceRegTeacher()">Teacher : Open Attendance Reg</button>
+                            </div>
+                        }
+                        else if (eSubModule == SubModule.LoadTeacherAttendanceInputs)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="ATTENDANCE.LoadTeacherAttendance()">Load Teacher Attendance</button>
+                        }
+                        else if (eSubModule == SubModule.Registration)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.AllTeachers)
+                        {
+
+                        }
+                    }
+                    else if (eModules == Modules.Teacher)
+                    {
+                        if (eSubModule == SubModule.AddStudent)
+                        {
+                        }
+                        else if (eSubModule == SubModule.AllStudent)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.ActiveStudent)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.InActiveStudent)
+                        {
+
+                        }
+                        else if (eSubModule == SubModule.TakeAttendanceInputs)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="COMMONINPUT.LoadCalendar()">Load Calendar</button>
+
+                            <div id="dvCalendar" style="display:none;">
+                                <label for="exampleFormControlInput1" class="form-label">Calendar</label>
+                                <input type="date" class="form-control mb-3" id="dtAttendaneDate" placeholder="yyyy-mm-dd" @*value="" min="2023-09-08" max="2030-12-31"*@ />
+                                <button class="btn btn-outline-primary" type="button" onclick="ATTENDANCE.OpenAttendanceRegStudent()">Student : Open Attendance Register</button>
+                            </div>
+                        }
+                        else if (eSubModule == SubModule.LoadAttendanceInputs)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="ATTENDANCE.LoadStudentAttendance()">Load Student Attendance</button>
+                        }
+                        else if (eSubModule == SubModule.CreateMarksheet)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="COMMONMETHODS.LoadStudentsForMarks()">Create Result</button>
+                        }
+                        else if (eSubModule == SubModule.LoadSemesterMarksheet)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="MARKSHEET.LoadSemesterMarksheet()">Load Semester Wise Marksheet</button>
+                        }
+                        else if (eSubModule == SubModule.CreateDMarksheet)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="MARKSHEET.LoadPreparedResults()">Load Result</button>
+                        }
+                        else if (eSubModule == SubModule.AddSubjects)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="MARKSHEET.LoadSubjects()">Load Subjects</button>
+                        }
+                        else if (eSubModule == SubModule.DefinedMaximumMarks)
+                        {
+                            <button class="btn btn-outline-primary" type="button" onclick="MARKSHEET.LoadDefinedMaximumMarks()">Defined Maximum Marks</button>
+                        }
+                        else if (eSubModule == SubModule.DisplayMarksheet)
+                        {
+                            <input class="btn btn-primary" type="button" value="Save" onclick="MARKSHEET.ShowMarksheet()">
+                        }
+                        else if (eSubModule == SubModule.Registration)
+                        {
+
+                        }
+                    }
+                    else if (eModules == Modules.Student)
+                    {
+
+                    }
+                    else if (eModules == Modules.Account)
+                    {
+                       
+                    }
+                }
+            </div>
+            #endregion
+        }
+    </div>
+</div>
+
+
+@*<script>
+    function SaveLayout() {
+        debugger;
+        var url = "@Url.Action("TimeTableDataNew", "Admin")";
+
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: {
+
+            },
+            success: function (data) {
+                COMMONMETHODS.SaveStatus(true, data);
+            }
+        });
+    }
+</script>*@

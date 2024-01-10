@@ -1,0 +1,125 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model List<StudentAttendance>
+@{
+    int iClass = 0, iMonth = 0, iYear = 0;
+    DateTime dt = new DateTime();
+    int iDaysInMonth = 0;
+    bool bPresent = false;
+    
+    List<IdNamePair> lstStudentDisctinct = null;
+    List<StudentAttendance> lstStudentAttendance = Model;
+
+    if (lstStudentAttendance != null && lstStudentAttendance.Count > 0)
+    {
+        iClass = lstStudentAttendance[0].Class;
+        dt = DateDS.IntToDate(lstStudentAttendance[0].Date, 0);
+        iMonth = dt.Month;
+        iYear = dt.Year;
+        iDaysInMonth = DateTime.DaysInMonth(iYear, iMonth);
+    }
+}
+
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Teacher, Value: (int)SubModule.LoadAttendanceInputs))
+    
+    <div class="row">
+        <div class="col-3">
+            <label class="control-label">Class : <b>@iClass</b></label>
+        </div>
+        <div class="col-3">
+            <label class="control-label">Date : <b>@dt</b></label>
+        </div>
+        <div class="col-md-3">
+            <label class="control-label">Month : <b>@iMonth</b></label>
+        </div>
+        <div class="col-3">
+            <label class="control-label">Year : <b>@iYear</b></label>
+        </div>        
+    </div>
+
+    <div class="row">
+        <div style="overflow: auto;width: auto;display:flex">
+            <table class="ReportTable" id="" style="left:0px;position:sticky;z-index:1;background-color:white">
+                <thead>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Student Name</th>
+                    </tr>
+                </thead>
+                <tbody id="">
+                    @{
+                        if (lstStudentAttendance != null)
+                        {
+                            lstStudentDisctinct = lstStudentAttendance.Select(a => new { a.StdId, a.StdName }).Distinct().ToList().Select(a => new IdNamePair(ID: a.StdId, Name: a.StdName)).ToList();
+                            for (int iRow = 0; iRow < lstStudentDisctinct.Count; iRow++)
+                            {
+                                IdNamePair obj = lstStudentDisctinct[iRow];
+                                <tr id="@obj.ID">
+                                    <td>@obj.ID</td>
+                                    <td>@obj.Name</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+            <table class="ReportTable">
+                <thead>
+                    <tr>
+                        @{
+                            for (int iDays = 1; iDays <= iDaysInMonth; iDays++)
+                            {
+                                <th>Date  @iDays</th>
+                            }
+                        }
+                    </tr>
+                </thead>
+                <tbody id="">
+                    @{
+                        if (lstStudentAttendance != null)
+                        {
+                            for (int i = 0; i < lstStudentDisctinct.Count; i++)  //Will define no of Rows
+                            {
+                                int iStdId = lstStudentDisctinct[i].ID;
+                                <tr>
+                                    @{
+                                        for (int iDays = 1; iDays <= iDaysInMonth; iDays++) //will define no of Cols
+                                        {
+                                            bPresent = false;
+                                            for (int j = 0; j < lstStudentAttendance.Count; j++)
+                                            {
+                                                DateTime iDay = DateDS.IntToDate(lstStudentAttendance[j].Date, 1);
+                                                if (iStdId == lstStudentAttendance[j].StdId && iDays == iDay.Day && lstStudentAttendance[j].Status == 1)
+                                                {
+                                                    bPresent = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (bPresent)
+                                            {
+                                                <td style="background:green">
+                                                    P
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td style="background:red">
+                                                    A
+                                                </td>
+                                            }
+                                        }
+                                    }
+                                </tr>
+                                            }
+                                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

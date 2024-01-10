@@ -1,0 +1,59 @@
+﻿@using SchoolBones
+@using SchoolBones.DataStructs
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model Menu[]
+
+@{
+    Menu[] arrMenu = null;
+    //Array arrModules = null;
+
+    //arrModules = Enum.GetValues(typeof(Modules));
+    arrMenu = Model;
+}
+
+<div class="row">
+    <div class="row" style="overflow:auto; height: 70vh;">
+        <table class="ReportTable">
+            <thead>
+                <tr>
+                    <th>Menu Id</th>
+                    <th>Menu</th>
+                    <th>Menu Caption</th>
+                    <th>SubModule</th>
+                    <th>IsActive</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="">
+                @{
+                    if (arrMenu != null)
+                    {
+                        for (int iRow = 0; iRow < arrMenu.Length; iRow++)
+                        {
+                            Menu oMenu = arrMenu[iRow];
+                            <tr class="@(oMenu.IsGroup == true || oMenu.MenuName == "AddMenu" ?"DisableElement":"")">
+                                <td>@oMenu.MenuId</td>
+                                <td>@oMenu.MenuName</td>
+                                <td>@oMenu.Caption</td>
+                                <td>@((Modules)(oMenu.SubModule))</td>
+                                <td>
+                                    <input class="form-check-input" type="checkbox" id="@oMenu.MenuId" checked="@(oMenu.IsActive == true?"checked":"")">
+                                </td>
+                                <td>
+                                    <input class="btn btn-outline-primary" type="button" value="Delete" onclick="MenuOpeationsConfirmation(@((int)CRUD.Delete), @oMenu.MenuId)">
+
+                                    @*Pending*@
+                                    @*<input id="@oMenu.MenuId" data-menuname ="@oMenu.MenuName" data-isactive="@oMenu.IsActive" class="btn btn-outline-primary" type="button" value="Edit" onclick="MenuOpeations(2, this)">
+                                        <input id="@oMenu.MenuId" data-menuname ="@oMenu.MenuName" data-isactive="@oMenu.IsActive" class="btn btn-outline-primary" type="button" value="Enable" onclick="MenuOpeations(3, this)">
+                                        <input id="@oMenu.MenuId" data-menuname ="@oMenu.MenuName" data-isactive="@oMenu.IsActive" class="btn btn-outline-primary" type="button" value="Disable" onclick="MenuOpeations(4, this)">*@
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

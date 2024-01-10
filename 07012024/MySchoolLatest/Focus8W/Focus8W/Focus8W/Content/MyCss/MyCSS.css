@@ -1,0 +1,215 @@
+﻿.wrapper{
+    height:555px;
+    overflow:hidden !important
+}
+body {
+    font-family:Calibri;
+    font-size:large;
+    color:black;
+    /*background-color:darksalmon;*/
+}
+
+/*.topContent{
+    height:40px;
+    background-color:#5c984873;
+    color:white;
+    font-size:large;
+    padding:5px;
+    margin: 0px;
+    text-align:right;
+}*/
+
+#id_bodymargin{
+    transition:all .6s linear;
+}
+.ltr .bodymargin{
+    margin-left:90px;
+    z-index:-999 !important;
+    margin-top:10px;
+}
+
+/*Start : Custom Scrollbar*/
+.custom_scrollbar {
+    overflow: auto !important;
+}
+
+    .custom_scrollbar::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    .custom_scrollbar::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 8px;
+    }
+
+    .custom_scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        background-color: #e9e9e9;
+    }
+/*End : Custom Scrollbar*/ 
+
+/*Start : MainMenu*/
+.Mainmenu{
+    float:left;
+    width:90px;
+    height:92vh !important;
+    top:68px;
+    z-index:5 !important;
+    position: absolute;
+    text-align:center;
+    border-radius: 4px !important;
+    /*background:white !important;*/
+
+}
+.showsubmenu{
+    left:100% !important;
+    display:block !important
+}
+.Mainmenu .nav li .hovco{
+    color: #717171 !important;
+}
+•Mainmenu .nav > li a {
+    font-size: 13px !important;
+    color: black !important;
+    font-weight: 400;
+}
+.Mainmenu .nav > li a.active {
+    background: #407394 !important;
+    color: #407394 !important;
+}
+.Mainmenu .nav > li > a:hover {
+    font-size: 13px !important;
+    color: #407394 !important;
+}
+.Mainmenu .nav > li > a:focus::after {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 7px solid #cdcded;
+    position: absolute;
+    top: 18px;
+    right: 0px;
+    bottom: 0px;
+}
+.Mainmenu .nav > li > a:active::before {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 7px solid white;
+    position: absolute;
+    top: 21px;
+    right: 0px;
+    bottom: 0px;
+}
+.Mainmenu ul {
+    list-style: none;
+    background-color: #44799b;
+    font-size: 14px;
+}
+.Mainmenu ul li a {
+    color: black !important;
+}
+.Mainmenu ul li a:hover{
+    color: #fff !important;
+}
+.Mainmenu li{
+    position:relative;
+}
+.Mainmenu a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+.Mainmenu ul ul {
+    position: absolute;
+    top: 0;
+    width: 200px !important;
+    display: none;
+    text-align: left !important;
+    z-index: 99999;
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #e4e4e4;
+}
+/*End : MainMenu*/ 
+
+
+#leftContent { 
+    border:solid;  
+    border-right-style:none;
+    border-color:black;
+    position:absolute;
+    font-size:x-large;   
+    background-color:white;  
+    padding-left:10px;   
+    margin-top: 0px;    
+    width: 250px;       
+    height:97.68%;
+    text-align: left; 
+    margin-left: 10px;
+}
+#mainContent {
+    font-size:medium;
+    color:black;
+    background-color:white;
+    border:solid;
+    padding-left:5px;   
+    margin-top: 0px;  
+    margin-left:0px;   
+    height:100%;
+}
+#rightContent {
+    background-color:azure;
+    color:white;
+    font-size:large;
+    padding:5px;
+    margin:10px;
+}
+
+#footerContent {
+    text-align: center;
+    color:white;
+    background-color:maroon;
+    font-size:large;
+    padding: 5px;
+    height:20px;
+    margin-left: 10px;
+}
+#centerContent{
+    color:black;
+    background-color:aquamarine;
+    margin:10px;
+    padding:10px;
+    border:solid;
+    height:500px;
+}
+#container {   
+    height:100%;       /* 250-(15x2) */
+    background-color:#0183e5;
+    padding:15px;
+    border:solid;
+    border-color:blue;
+}
+#innerPanel {
+    width:100%;
+    height:80%;
+    background-color:rgba(255, 255, 255, .5);
+    border-radius:10px;
+    padding-top:10%;
+    padding-bottom:10%;
+}
+
+#squareContent{
+    margin-left:20px;
+    margin-right:10px;
+    padding-left:50px;
+    padding-right:50px;
+}

@@ -1,0 +1,227 @@
+﻿@using SchoolBones
+@model IdNamePair[]
+    @{ 
+        IdNamePair[] arrDBInfo = null;
+
+        arrDBInfo = Model;
+    }
+<div class="row">
+    @*<input type="button" value="Save" onclick="SaveCreateSchool()" />
+    <input class="btn btn-primary" type="button" value="Login" onclick="location.href='@Url.Action("Index", "Home")'">*@
+
+
+    <div>
+        <form class="text-end">
+            <input class="btn btn-primary" type="button" value="Delete" onclick="DeleteCreatedSchool()" />
+            <input class="btn btn-primary" type="button" value="Save" onclick="SaveCreateSchool()" />
+        </form>
+    </div>
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingZero">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZero" aria-expanded="false" aria-controls="collapseZero">
+               Created Databases
+            </button>
+        </h2>
+        <div id="collapseZero" class="accordion-collapse collapse" aria-labelledby="headingZero" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Databases</label>
+                    <select id="ddlDatabaseName" class="form-select">
+                        <option value="-1">--Select Database--</option>
+                        @{ 
+                            if (arrDBInfo != null)
+                            {
+                                for (int i = 0; i < arrDBInfo.Length; i++)
+                                {
+                                    <option @arrDBInfo[i].ID>@arrDBInfo[i].Name</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                License Details
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="form-group">
+                    <label class="control-label">Storage DbName</label>
+                    <input type="text" class="form-control" id="txtDbName" value="Madarsa_" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Provider</label>
+                    <input type="text" class="form-control" id="txtProvider" value="Sheebu" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Key</label>
+                    <input type="text" class="form-control" id="txtKey" value="Key-123" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Installation Date</label>
+                    @*<input type="text" class="form-control" id="txtInstallationDate" value="1"/>*@
+                    <input id="txtInstallationDate" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" @*min="2020-01-01" max="2023-12-31"*@ />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Expired on</label>
+                    @*<input type="text" class="form-control" id="txtExpiryDate" value="2" />*@
+                    <input id="txtExpiryDate" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" @*min="2020-01-01" max="2023-12-31"*@ />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Organization Details
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="form-group">
+                    <label class="control-label">School Name</label>
+                    <input type="text" class="form-control" id="txtSchoolName" value="Madarsa Talimul Quraan" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Proprietor</label>
+                    <input type="text" class="form-control" id="txtProprietor" value="Salman" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Establish</label>
+                    <input type="text" class="form-control" id="txtEstablish" value="Establish : 1001" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Address</label>
+                    <input type="text" class="form-control" id="txtAddress" value="Jinhauli" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Contact</label>
+                    <input type="text" class="form-control" id="txtContact" value="9865896" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Other Details
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+    function SaveCreateSchool() {
+        debugger;
+        oProjectConfiguration = {};
+
+        var txtDbName = document.getElementById("txtDbName").value;
+        var txtProvider = document.getElementById("txtProvider").value;
+        var txtKey = document.getElementById("txtKey").value;
+        //var txtInstallationDate = document.getElementById("txtInstallationDate").value;
+        var sInstallationDate = document.getElementById("txtInstallationDate").value;
+        var iInstallationDate = FDate.convertDateToInt(sInstallationDate, "yyyy-mm-dd", 0);
+        //var txtExpiryDate = document.getElementById("txtExpiryDate").value;
+        var sExpiryDate = document.getElementById("txtExpiryDate").value;
+        var iExpiryDate = FDate.convertDateToInt(sExpiryDate, "yyyy-mm-dd", 0);
+
+        var txtSchoolName = document.getElementById("txtSchoolName").value;
+        var txtProprietor = document.getElementById("txtProprietor").value;
+        var txtEstablish = document.getElementById("txtEstablish").value;
+        var txtAddress = document.getElementById("txtAddress").value;
+        var txtContact = document.getElementById("txtContact").value;
+
+        var oLicenseInfo = {};
+        oLicenseInfo.DbName = txtDbName;
+        oLicenseInfo.Provider = txtProvider;
+        oLicenseInfo.Key = txtKey;
+        oLicenseInfo.InstallationDate = iInstallationDate;
+        oLicenseInfo.ExpiryDate = parseInt(iExpiryDate);
+        oProjectConfiguration.LicenseInfo = oLicenseInfo;
+
+        var oSchoolInfo = {};
+        oSchoolInfo.SchoolName = txtSchoolName;
+        oSchoolInfo.Principal = txtProprietor;
+        oSchoolInfo.Establish = txtEstablish;
+        oSchoolInfo.Establish = 'Est : 1990';
+        oSchoolInfo.RegistrationDate = 0;
+        oSchoolInfo.RegistrationNo = 'Reg : 786';
+        oSchoolInfo.Address = txtAddress == '' ? 'Near Jinhauli Barabanki' : txtAddress;
+        oSchoolInfo.Contact = txtContact;
+        oProjectConfiguration.SchoolInfo = oSchoolInfo;
+
+        var url = '@Url.Action("SaveCreateSchool", "Home")';
+
+
+        debugger;
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: {
+                oProjectConfiguration: oProjectConfiguration
+            },
+            success: function (data) {
+                successLoadMenuScreen(true, data);
+            }
+        });
+    }
+    function successLoadMenuScreen(bSuccess, data) {
+        debugger;
+        if (data.iStatus > 0) {
+            alert("School is created successfully");
+        }
+        else {
+            alert("School is not created successfully");
+        }
+    }
+
+
+    function DeleteCreatedSchool() {
+        debugger;
+        var ddlDatabaseName = document.getElementById("ddlDatabaseName").value;
+        if (ddlDatabaseName == "") {
+            return;
+        }
+
+        var url = '@Url.Action("DeleteCreatedSchool", "Home")';
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: {
+                sDbName: ddlDatabaseName
+            },
+            success: function (data) {
+                successDeleteCreatedSchool(true, data);
+            }
+        });
+    }
+    function successDeleteCreatedSchool(bSuccess, data) {
+        debugger;
+        if (data.iStatus > 0) {
+            alert("School is deleted successfully");
+        }
+        else {
+            alert("School is not deleted successfully");
+        }
+    }
+</script>

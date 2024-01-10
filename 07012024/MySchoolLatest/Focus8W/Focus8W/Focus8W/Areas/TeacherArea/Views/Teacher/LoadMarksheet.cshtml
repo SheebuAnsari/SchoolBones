@@ -1,0 +1,66 @@
+﻿@using SchoolBones
+@using SchoolBones.Enums
+
+@model List<IdValuePair>
+@{
+    List<IdValuePair> lstData = Model;
+    IdNamePair[] arrSubjects = (IdNamePair[])lstData[0].Value;
+    IdValuePair[] arrMarks = (IdValuePair[])lstData[1].Value;
+
+    List<int> arrColMarks = null;
+}
+
+<div class="row" id="dvDisplayMarksheet">
+    <table class="ReportTable table-hover table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Subjects</th>
+
+                <th>Test</th>
+                <th>Half-yearly</th>
+                <th>Annual</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{
+                if (arrSubjects != null)
+                {
+                    for (int iSub = 0; iSub < arrSubjects.Length; iSub++)
+                    {
+                        <tr>
+                            <th>@(iSub + 1)</th>
+                            <th>@arrSubjects[iSub].Name</th>
+
+                            @for (int iGroup = 0; iGroup < arrMarks.Length; iGroup++)
+                            {
+                                arrColMarks = (List<int>)arrMarks[iGroup].Value;
+                                if (arrColMarks != null && arrColMarks.Count > 0)
+                                {
+                                    <td class="">@arrColMarks[iSub]</td>
+                                }
+                            }
+                        </tr>
+                    }
+                }
+            }
+            <tr>
+                <th colspan="2" class="text-center">Total</th>
+                @{
+                    for (int iGroup = 0; iGroup < arrMarks.Length; iGroup++)
+                    {
+                        int iIndexOfTotal = 0;
+                        arrColMarks = (List<int>)arrMarks[iGroup].Value;
+                        iIndexOfTotal = arrColMarks.Count - 1;
+                        <th>@arrColMarks[iIndexOfTotal]</th>
+                    }
+                }
+            </tr>
+        </tbody>
+
+
+    </table>
+</div>
+
+

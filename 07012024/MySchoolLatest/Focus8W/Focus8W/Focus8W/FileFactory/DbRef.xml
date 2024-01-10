@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<SqlServer>
+	<Server>MOHD-SHEEBU\SQLSERVER2019</Server>
+	<DbName>SubhashAadarsh2056</DbName>
+	<UserId>sa</UserId>
+	<Password>focus</Password>
+</SqlServer>

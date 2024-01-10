@@ -1,0 +1,51 @@
+﻿@using SchoolBones.DataStructs
+
+@model ReportData
+@{ 
+    ReportData oReportData = null;
+
+    oReportData = Model;
+}
+
+@{ 
+    int iCol = 0;
+    object[] arrCellData = null;
+
+}
+
+<div class="row">
+    <table class="ReportTable">        
+        @if (oReportData != null)
+        {
+            ColumnInfo[] arrCollInfo = oReportData.Columns;
+            LineData[] arrLineData = oReportData.LineData;
+
+            <thead>
+                <tr>
+                    @for (iCol = 0; iCol < arrCollInfo.Length; iCol++)
+                    {
+                        <th>@arrCollInfo[iCol].ColumnName</th>
+                    }
+                </tr>
+            </thead>
+
+
+            if (arrLineData != null)
+            {
+                <tbody>
+                    @for (int iRow = 0; iRow < arrLineData.Length; iRow++)
+                    {
+                        arrCellData = arrLineData[iRow].CellData;
+                        <tr>
+                            @for (iCol = 0; iCol < arrCellData.Length; iCol++)
+                            {
+                                <td>@arrCellData[iCol]</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            }
+        }
+    </table>
+
+</div>

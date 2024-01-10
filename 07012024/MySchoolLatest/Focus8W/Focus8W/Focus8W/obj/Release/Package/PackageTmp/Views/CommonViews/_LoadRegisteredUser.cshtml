@@ -1,0 +1,45 @@
+﻿@using SchoolBones
+@using SchoolBones.Enums
+@model DoubleIntValue
+    @{ 
+        string tBodyId = "";
+        DoubleIntValue oRegUsers = null;
+        Modules eModules = Modules.Developer;
+        Registration[] arrRegisteredUsers = null;
+
+        oRegUsers = Model;
+        if (oRegUsers != null)
+        {
+            eModules = (Modules)oRegUsers.Id1;
+            tBodyId = "tBodyId_" + eModules.ToString();
+            arrRegisteredUsers = (Registration[])oRegUsers.Value;
+        }
+    }
+
+<div class="row">
+    <table class="ReportTable">
+        <thead>
+            <tr>
+                <th>Registration Id</th>
+                <th>Name</th>
+                <th>User Type</th>
+            </tr>
+        </thead>
+        <tbody id="@tBodyId">
+            @{
+                if (arrRegisteredUsers != null)
+                {
+                    for (int iUser = 0; iUser < arrRegisteredUsers.Length; iUser++)
+                    {
+                        <tr id="@arrRegisteredUsers[iUser].UserType" data-RegId="@arrRegisteredUsers[iUser].RegistrationId" onclick="RIBBONCONTROLTEACHER.SelectRowAddRegUserDetails(this, '@tBodyId')">
+                            <td>@arrRegisteredUsers[iUser].RegistrationId</td>
+                            <td>@arrRegisteredUsers[iUser].UserName</td>
+                            <td>@arrRegisteredUsers[iUser].UserType</td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

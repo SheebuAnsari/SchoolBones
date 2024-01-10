@@ -1,0 +1,33 @@
+﻿<h3>PrintReciept</h3>
+<div class="row">
+    <input type="button" value="Print Receipt" onclick="UsingServer()" />
+</div>
+
+<script>
+   
+    function UsingServer() {
+        debugger
+        var url = "@Url.Action("ReceiptUsingServer", "Developer")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "Get",
+            dataType: "json",
+            data: {
+            },
+            success: function (data) {
+                debugger
+                successUsingServer(data);
+            }
+        });
+    }
+    function successUsingServer(data) {
+        debugger;
+        if (data[0].indexOf('.html') > 0) {
+            var receiptWin = window.open();
+            receiptWin.document.write(data[1]);
+            receiptWin.print();
+        }
+
+    }
+</script>

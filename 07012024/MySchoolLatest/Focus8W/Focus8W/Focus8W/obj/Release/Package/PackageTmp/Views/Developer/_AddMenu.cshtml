@@ -1,0 +1,201 @@
+﻿@using SchoolBones
+@using SchoolBones.DataStructs
+@using SchoolBones.Enums
+
+@model Menu[]
+
+@{
+    int i = 0;
+    Menu[] arrMenu = null;
+    Array arrModules = Enum.GetValues(typeof(Modules));
+
+    arrMenu = Model;
+}
+
+@*NOTE : via using this screen, only we need to add submodule instead of main module.*@
+
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Admin, Value: (int)SubModule.AddMenu))
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label">Menu Name</label>
+                <input id="txtMenuName" type="text" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Module</label>
+                <select id="ddlModule" class="form-select">
+                    @{
+                        if (arrModules != null)
+                        {
+                            for (; i < arrModules.Length; i++)
+                            {
+                                <option value="@i">@Convert.ToString(arrModules.GetValue(i))</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+
+            @*<div class="form-group">
+                    <label class="control-label">Sub-module</label>
+                    <input id="txtSubModule" type="text" class="form-control" />
+                </div>*@
+
+            <div class="form-check">
+                <input id="chkAIsGroup" class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label" for="flexCheckChecked">
+                    Is group?
+                </label>
+            </div>
+
+            <input class="btn btn-primary" type="button" value="Save" onclick="SaveMenu()">
+        </div>
+
+        <div class="col-md-9" id="dvLoadMenus">
+            @Html.Partial("~\\views\\admin\\_LoadMenus.cshtml")
+        </div>
+    </div>
+</div>
+
+<div class="modal fade right" id="popupMenuOpeations" data-bs-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="hdnAction" />
+                <input type="hidden" id="hdnMenuId" />
+
+                <label>Do you want to delete the data?</label>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="MenuOpeations()">Yes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @*var arrMenu = @Html.Raw(Json.Encode(arrMenu));*@
+
+    function SaveMenu() {
+        debugger;
+        var oMenu = {};
+        var txtMenuName = document.getElementById("txtMenuName");
+        var ddlModule = document.getElementById("ddlModule");
+        //var txtSubModule = document.getElementById("txtSubModule");
+        //var chkAIsGroup = document.getElementById("chkAIsGroup");
+
+        oMenu.MenuName = txtMenuName.value;
+        oMenu.Module = -1;
+        oMenu.SubModule = parseInt(ddlModule.value);
+        oMenu.IsGroup = 0;
+        oMenu.IsActive = 1;
+
+
+
+        var url = "@Url.Action("SaveMenu", "Developer")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: {
+                oMenu: oMenu
+            },
+            success: function (data) {
+                debugger
+                successSaveMenu(true, data);
+            }
+        });
+    }
+    function successSaveMenu(success, data) {
+        debugger;
+        if (data.iStatus > 0) {
+            COMMONMETHODS.ShowToastAsAlert("Data saved successfully.");
+        } else {
+            COMMONMETHODS.ShowToastAsAlert("Something wrong!");
+        }
+    }
+
+    //var arrIdStatusPair = [];
+    //$(document).ready(function(){
+    //    for (var i = 0; i < arrMenu.length; i++) {
+    //        if(arrMenu[i].IsActive){
+    //            arrIdStatusPair.push(arrMenu[i].MenuId)
+    //        }
+    //    }
+    //})
+
+    //This code for Multiple Selection
+    //function GetMenuIds(ele) {
+    //    debugger;
+    //    var i = 0;
+    //    var IdStatusPair = {};
+    //    var iMenuId = parseInt(ele.id);
+    //    var bChecked = ele.checked;
+    //    if (ele.checked) {
+    //        IdStatusPair.ID = iMenuId;
+    //        IdStatusPair.Status = bChecked;
+    //        arrIdStatusPair.push(IdStatusPair);
+    //    } else {
+    //        for (; i < arrIdStatusPair.length; i++) {
+    //            if (iMenuId == arrIdStatusPair[i].ID)
+    //                break;
+    //        }
+    //        arrIdStatusPair.splice(i, 1);
+    //    }
+    //}
+
+    function MenuOpeations() {
+        debugger;
+        var eAction = -1;
+        var iMenuId = -1;
+        var oMenu = {};
+
+        eAction = document.getElementById("hdnAction").value;
+        iMenuId = document.getElementById("hdnMenuId").value;
+
+        oMenu.Id = iMenuId;
+        oMenu.Tag = {};
+        
+        var url = "@Url.Action("MenuOpeations", "Admin")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: {
+                eAction: eAction,
+                oMenu: oMenu,
+            },
+            success: function (data) {
+                successMenuOpeations(true, data);
+            }
+        });
+    }
+    function successMenuOpeations(bSuccess, data) {
+        debugger;
+        if (data.iStatus > 0) {
+            COMMONMETHODS.ShowToastAsAlert("Success");
+        } else {
+            COMMONMETHODS.ShowToastAsAlert("Failed");
+        }
+    }
+
+    function MenuOpeationsConfirmation(eAction, iMenuId) {
+        $('#popupMenuOpeations').appendTo("body").remove();  //Note: before rendering close the existing modal from Body tag.
+        $('#popupMenuOpeations').appendTo("body").modal('show');
+        document.getElementById("hdnAction").value = eAction;
+        document.getElementById("hdnMenuId").value = iMenuId;
+    }
+</script>

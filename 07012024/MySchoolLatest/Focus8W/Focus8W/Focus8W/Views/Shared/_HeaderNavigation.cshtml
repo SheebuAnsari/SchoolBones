@@ -1,0 +1,378 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@{
+    string strCommonNavigation = "";
+    DoubleInt oInputs = null;
+
+    oInputs = Model;
+    Modules eModules = (Modules)oInputs.Id;
+    SubModule eSubModule = (SubModule)(oInputs.Value);
+
+    Array arrModules = Enum.GetValues(typeof(Modules));
+    strCommonNavigation = string.Format("{0}/{1}", eModules, eSubModule);
+}
+
+@*<script src="~/Scripts/Admin/RibbonControlAdmin.js"></script>*@
+
+<div class="Navigation">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <span class="navbar-brand">@strCommonNavigation</span>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#CommonNavigation" aria-controls="CommonNavigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="CommonNavigation" style="background-color: aliceblue;">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @{
+                        if (eModules == Modules.Admin)
+                        {
+                            if (eSubModule == SubModule.AddTeacher)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.AddUserDetails(@((int)Modules.Teacher))" href="#">Save Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.BackToLoadUser(@((int)Modules.Teacher))" href="#">Back</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.TimeTableLayout)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TIMETABLE.SaveTimeTableLayout()" href="#">Save Layout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TIMETABLE.DeleteTimeTableLayout()" href="#">Delete Layout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TIMETABLE.LoadClasswiseTimeTable()" href="#">Load Layouts</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.CreateTimeTable)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="TIMETABLE.SaveTimeTable()" href="#">Save Time Table</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="TIMETABLE.LoadTimeTableAsPerLayoutAndClass()" href="#">Load Time Table</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="TIMETABLE.DeleteTimeTable()" href="#">Delete Time Table</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.ActiveTeachers)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.DoActiveInActiveTeacher(false);" href="#">Do In-Active</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.RefreshTeacherData('tblActDeActTeachers', true);" href="#">Refresh</a>
+                                </li>
+                                <li class="nav-item">
+                                    <input id="txtSearchStudent" class="form-control me-2" type="search" placeholder="Search student name" aria-label="Search" onkeyup="ADMIN.searchTeacher('tblTeacherDetail')" />
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.InActiveTeachers)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.DoActiveInActiveTeacher(true)" href="#">Do Active</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.RefreshTeacherData('tblActDeActTeachers', false);" href="#">Refresh</a>
+                                </li>
+                                <li class="nav-item">
+                                    <input id="txtSearchStudent" class="form-control me-2" type="search" placeholder="Search student name" aria-label="Search" onkeyup="ADMIN.searchTeacher('tblTeacherDetail')" />
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.IDCardOfTeachers)
+                            {
+
+                            }
+                            else if (eSubModule == SubModule.IDCardOfStudents)
+                            {
+
+                            }
+                            else if (eSubModule == SubModule.TakeTeacherAttendanceInputs)
+                            {
+
+                            }
+                            else if (eSubModule == SubModule.LoadTeacherAttendanceInputs)
+                            {
+
+                            }
+                           
+                            else if (eSubModule == SubModule.AllTeachers)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.RefreshTeacherData('tblTeacherDetail');" href="#">Refresh</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.DeleteTeacher(false);" href="#">Delete Teacher Temporary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.DeleteTeacher(true);" href="#">Delete Teachers Permanent</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.EditTeacher();" href="#">Edit Teacher</a>
+                                </li>
+                                <li class="nav-item">
+                                    <input id="txtSearchTeacher" class="form-control me-2" type="search" placeholder="Search teacher name" aria-label="Search" onkeyup="ADMIN.searchTeacher('tblTeacherDetail')" />
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMIN.Close();" href="#">Back</a>
+                                </li>
+                            }
+                        }
+                        else if (eModules == Modules.Teacher)
+                        {
+                            if (eSubModule == SubModule.AddStudent)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.AddUserDetails(@((int)Modules.Student))" href="#">Save Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.BackToLoadUser(@((int)Modules.Student))" href="#">Back</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.AllStudents)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TEACHER.RefreshStudentData('tblStudentDetail');" href="#">Refresh</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TEACHER.DeleteStudent(false);" href="#">Delete Student Temporary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TEACHER.DeleteStudent(true);" href="#">Delete Student Permanent</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TEACHER.EditStudent();" href="#">Edit Student</a>
+                                </li>
+                                <li class="nav-item">
+                                    <input id="txtSearchStudent" class="form-control me-2" type="search" placeholder="Search student name" aria-label="Search" onkeyup="TEACHER.searchStudent('tblStudentDetail')" />
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TEACHERCOMMONJS.Close();">Back</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.ActiveStudent)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TEACHER.DoActiveInActiveStudent(false)" href="#">Do In-Active</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.InActiveStudent)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="TEACHER.DoActiveInActiveStudent(true)" href="#">Do Active</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.TakeAttendanceInputs)
+                            {
+                                <li class="nav-item">
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.LoadAttendanceInputs)
+                            {
+                                <li class="nav-item">
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.CreateMarksheet)
+                            {
+                                <li class="nav-item">
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.CreateDMarksheet)
+                            {
+                                <li class="nav-item">
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.AddSubjects)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="MARKSHEET.AddSubject(this)" href="#">Add Subject</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="MARKSHEET.DeleteSubject(this)" href="#">Delete Subject</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="MARKSHEET.UpdateSubjectPopup(this)" href="#">Update Subject</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.DefinedMaximumMarks)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="MARKSHEET.SaveMaxMarks()" href="#">Save</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="MARKSHEET.RefreshMaximumMarks();" href="#">Refresh</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.DisplayMarksheet)
+                            {
+
+                            }
+                            else if (eSubModule == SubModule.Registration)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.SaveRegistration(@((int)eModules));" href="#">Save</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.DeleteRegistration()" href="#">Delete</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.RefreshRegistration(@((int)eModules))" href="#">Refresh</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.LoadUserDetails()" href="#">Fill @eModules Details</a>
+                                </li>
+                            }
+                        }
+                        else if (eModules == Modules.Student)
+                        {
+                            if (eSubModule == SubModule.Registration)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.SaveRegistration(@((int)eModules));" href="#">Save</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.DeleteRegistration()" href="#">Delete</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.RefreshRegistration(@((int)eModules));" href="#">Refresh</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ADMISSION.LoadUserDetails()" href="#">Fill @eModules Details</a>
+                                </li>
+                            }
+                        }
+                        else if (eModules == Modules.Account)
+                        {
+                            if (eSubModule == SubModule.FeeSubmission)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.LoadFeeDetails()" href="#">Load Fee Details</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.ClasswiseStudents)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.LoadClasswiseStudents()" href="#">Load Classwise Students</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.FeesStructure)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.CallCommonPopup(1)" href="#">Add</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.CallCommonPopup(2)" href="#">Update</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.CallCommonPopup(3)" href="#">Delete</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.DefineMontlySalary)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.SaveSalary()" href="#">Update</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.LoadSalary)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.LoadSalaryDetails()" href="#">Load</a>
+                                </li>
+                            }
+                            else if (eSubModule == SubModule.LoadFeeCollection)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="ACCOUNT.LoadFeeCollection()" href="#">Load Fee Collection</a>
+                                </li>
+                            }
+                        }
+
+
+
+
+
+                        if (eSubModule == SubModule.AddMenu)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="DEV.ToExcel(this)" href="#">To Excel</a>
+                            </li>
+                            <li class="nav-item">
+                                    @*FillterMenu*@
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" onclick="DEV.ToggleSubModule()">
+                                                Admin
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-dark" id="ulModule" style="display:none;">
+                                                @if (arrModules != null)
+                                                {
+                                                    for (int i = 0; i < arrModules.Length; i++)
+                                                    {
+                                                        <li onclick="DEV.FilterMenu(this)" id="@Convert.ToString(arrModules.GetValue(i))">
+                                                            <a class="dropdown-item" href="#">@Convert.ToString(arrModules.GetValue(i))</a>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    @*popup not working for delete confirmation*@                
+                                    @*<a class="nav-link active" onclick="ConfirmationDeleteMenu()" data-target="#popupMenuOpeations" data-toggle="modal" href="#">Delete Menu</a>*@
+
+                                    <a class="nav-link active" onclick="DEV.ConfirmationDeleteMenu()" href="#">Delete Menu</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="DEV.FilterMenu()" href="#">Refresh</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="DEV.TestIndex()" href="#">TestIndex</a>
+                                </li>
+                        }
+                    }
+                </ul>
+
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+<hr />
+
+
+<div id="dvContainerMenuOpeations">
+    <div class="modal fade right" id="popupMenuOpeations" data-bs-backdrop="static" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    @*<input type="hidden" id="hdnAction" />*@
+                    <input type="hidden" id="hdnMenuId" />
+
+                    <label>Do you want to delete the data?</label>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="DeleteMenu()">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

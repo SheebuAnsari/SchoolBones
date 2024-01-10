@@ -1,0 +1,357 @@
+﻿@using SchoolBones.DataStructs
+
+@model FeeDetails
+@{
+    FeeDetails objFeeDetails = Model;
+
+    int iWallet = 0;
+    if (objFeeDetails != null && objFeeDetails.ArrFeesInfo != null)
+    {
+        iWallet = objFeeDetails.Wallet;
+        //iWallet = objFeeDetails.ArrFeesInfo[objFeeDetails.ArrFeesInfo.Length - 1].Settlement;
+    }
+    //iWallet = objFeeDetails.Wallet;
+}
+
+<input type="hidden" id="hdnWallet" value="@iWallet" />
+<div class="row">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">Navbar</a>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="btn btn-outline-success" type="button" onclick="BackToFeeSubmission()" value="Back" />
+            </form>
+        </div>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-3">
+        <div class="form-group">
+            <label>Wallet Settlement : 
+                <input id="txtWallet" data-enrollmentno="@objFeeDetails.StdInfo.EnrollmentNo" type="text" class="form-control" value="@iWallet" onclick="SaveWalletSettlement(this)" />
+            </label>
+            @*<input id="txtWallet" data-enrollmentno="@objFeeDetails.StdInfo.EnrollmentNo"  data-walletsettlement="@iWallet" type="button" class="form-control" value="Wallet Settlement : @iWallet" onclick="SaveWalletSettlement(this)" />*@
+        </div>
+        <div class="form-group">
+            <label class="control-label">EnrollmentNo</label>
+            <input id="txtEnrollmentNo" type="text" class="form-control" value="@objFeeDetails.StdInfo.EnrollmentNo" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label">StdId</label>
+            <input id="txtStdId" type="text" class="form-control" value="@objFeeDetails.StdInfo.StdId" readonly />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Std Name</label>
+            <input id="txtStdName" type="text" class="form-control" value="@objFeeDetails.StdInfo.StdName" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Current Class</label>
+            <input id="txtClass" type="text" class="form-control" value="@objFeeDetails.StdInfo.Class" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Year</label>
+            <input id="txtYear" type="text" class="form-control" value="@objFeeDetails.StdInfo.Year" readonly />
+        </div>
+    </div>
+
+    <div class="col-9" id="">
+        <div id="dvFeeDetails">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Month</th>
+                        <th>Fee</th>
+                        <th>Amount</th>
+                        <th>Max Fee</th>
+                        <th>Monthly Setmt</th>
+                        <th>Status</th>
+                        <th>Concession</th>
+                    </tr>
+                </thead>
+                <tbody id="">
+                    @{
+                        int i = 0, j = 0;
+                        bool bStatus = false;
+                        int iNoOfMonths = 12;
+                        int iTotal = 0, iMaxFee = 0, iSettlement = 0;
+                        iMaxFee = objFeeDetails.MaxFee;
+                        for (i = 1; i <= iNoOfMonths; i++)
+                        {
+                            bStatus = false;
+                           
+                            <tr>
+                                <td>@i</td>
+                                <td>@i</td>
+                                @{
+                                    if (objFeeDetails.ArrFeesInfo != null)
+                                    {
+                                        for (j = 0; j < objFeeDetails.ArrFeesInfo.Length; j++)
+                                        {
+                                            if (i == objFeeDetails.ArrFeesInfo[j].ForMonth)
+                                            {
+                                                iTotal += objFeeDetails.ArrFeesInfo[j].MonthlyFee;
+                                                iSettlement += objFeeDetails.ArrFeesInfo[j].Settlement;
+                                                bStatus = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (bStatus)
+                                    {
+
+                                        <td><input type="button" class="btn-danger" value="Edit" onclick="OpenFeeRegister(@i)" /></td>
+                                        <td><label>@objFeeDetails.ArrFeesInfo[j].MonthlyFee</label></td>
+                                            <td>@iMaxFee</td>
+                                            <td>@objFeeDetails.ArrFeesInfo[j].Settlement</td>
+                                            <td>@objFeeDetails.ArrFeesInfo[j].Status</td>
+                                            <td>@objFeeDetails.ArrFeesInfo[j].Concession</td>
+                                    }
+                                    else
+                                    {
+                                           
+                                        <td><input type="button" class="btn-danger" value="Submit" onclick="OpenFeeRegister(@i)" /></td>
+                                        <td>00</td>
+                                            <td>@iMaxFee</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                    }
+                                }
+                            </tr>
+                                    }
+                                   
+                                    <tr>
+                                        <th colspan="3">Total</th>
+                                        <th>@iTotal</th>
+                                        <th>@(iMaxFee * 12)</th>
+                                        <th>@iSettlement</th>
+                                        <th>0.00</th>
+                                        <th>0.00</th>
+                                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+        <div id="dvSaveFee" style="display:none">
+            <div class="form-group">
+                <label class="control-label">Max Fee of class</label>
+                <input id="txtMaxFee" type="text" class="form-control" value="@objFeeDetails.MaxFee" readonly />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Enter Amount</label>
+                <input id="txtMonthlyFee" type="text" class="form-control" onkeyup="FeeSettlement(this)" />
+            </div>
+            @{
+                if (iWallet > 0)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="chkPickFromWallet" onclick="PickFromWallet(this)">
+                        <label class="form-check-label" for="chkPickFromWallet">
+                            Pick From Wallet
+                        </label>
+                    </div>
+                    <div id="dvRemainingAmt" class="form-group" style="display:none">
+                        <label class="control-label">Fill Remaining Amount</label>
+                        <input id="txtRemainingAmount" type="text" class="form-control" onkeyup="RemainingAmount(this)"/>
+                    </div>
+                }
+            }
+
+            <div class="form-group">
+                <label class="control-label" id="lblSettlement">Settlement</label>
+                <input id="txtSettlement" type="text" class="form-control" />
+            </div>
+            <input class="btn btn-primary" type="button" value="Save" onclick="SaveFees()">
+            <input class="btn btn-primary" type="button" value="Close" onclick="Close()">
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var oFeeInfo = {};
+
+    function SaveWalletSettlement(eleBtn) {
+        //debugger;
+        var iEnrollmentNo = eleBtn.getAttribute("data-enrollmentno");
+        var iWallet = eleBtn.getAttribute("data-walletsettlement");
+        var bStatus = confirm("Are you sure for wallet settlement for Amount : " + iWallet)
+        if (bStatus) {
+            var url = "@Url.Action("WalletSettlement", "Accounts")";
+            $.ajax({
+                url: url,
+                cache: false,
+                type: "POST",
+                dataType: "html",
+                data: {
+                    iEnrollmentNo: iEnrollmentNo
+                },
+                success: function (data) {
+                    COMMONMETHODS.ShowToastAsAlert("Done!");
+                }
+            });
+        }
+    }
+    function PickFromWallet(eleChk) {
+        //debugger;
+        var dvRemainingAmt = '';
+        var hdnWallet = document.getElementById("hdnWallet");
+        var txtMonthlyFee = document.getElementById("txtMonthlyFee");
+
+        txtMonthlyFee.readOnly = !true;
+        txtMonthlyFee.value = 0;
+        if (eleChk.checked) {
+            txtMonthlyFee.readOnly = true;
+            txtMonthlyFee.value = parseInt(hdnWallet.value);
+            var iMaxFee = parseInt(document.getElementById("txtMaxFee").value);
+            if (parseInt(hdnWallet.value) < iMaxFee) {
+                dvRemainingAmt = document.getElementById("dvRemainingAmt");
+                dvRemainingAmt.style.display = 'block';
+            }
+        }
+
+        txtMonthlyFee.addEventListener("onchange", FeeSettlement(this));
+    }
+
+    function RemainingAmount(ele) {
+        debugger;
+        var txtMonthlyFee = undefined;
+        var iWallet = 0;
+        var iMonthlyFee = 0;
+        var iSettlement = -1;
+        var iRemainingAmount = 0;
+        var iMaxFee = 0;
+
+        txtMonthlyFee = document.getElementById("txtMonthlyFee");
+        iMaxFee = parseInt(document.getElementById("txtMaxFee").value);
+        iRemainingAmount = parseInt(ele.value);
+        iWallet = parseInt(document.getElementById("txtWallet").value)
+       
+        iSettlement = (iRemainingAmount + iWallet);
+        txtMonthlyFee.value = iSettlement;
+
+        iSettlement = iSettlement - iMaxFee;
+        if (iSettlement >= 0) {
+            document.getElementById("lblSettlement").textContent = "Advance";
+        } else {
+            document.getElementById("lblSettlement").textContent = "Pending";
+        }
+        document.getElementById("txtSettlement").value = iSettlement;
+        oFeeInfo.Settlement = iSettlement;
+        oFeeInfo.MonthlyFee = parseInt(txtMonthlyFee.value);
+    }
+
+    function FeeSettlement(ele) {
+        debugger
+        var chkPickFromWallet = undefined;
+        var txtSettlement = undefined;
+        var iWallet = 0;
+        var iSettlement = -1;
+        var iMaxFee = 0;
+        var iMonthlyFee = 0;
+
+        iMaxFee = parseInt(document.getElementById("txtMaxFee").value);
+        chkPickFromWallet = document.getElementById("chkPickFromWallet");
+        txtSettlement = document.getElementById("txtSettlement");
+        iWallet = parseInt(document.getElementById("txtWallet").value);
+
+        if (ele.value == undefined) {
+            iMonthlyFee = parseInt(document.getElementById("txtMonthlyFee").value)
+        } else {
+            iMonthlyFee = parseInt(ele.value);
+        }
+        iSettlement = iMonthlyFee - iMaxFee;
+        if (iSettlement > 0) {
+            document.getElementById("lblSettlement").textContent = "Advance";
+        } else if(iSettlement < 0){
+            document.getElementById("lblSettlement").textContent = "Pending";
+        } else {
+            document.getElementById("lblSettlement").textContent = "Full paid";
+        }
+        if (iWallet < 0) {
+            iSettlement += iWallet;
+        }
+        else {
+            if (chkPickFromWallet != null && chkPickFromWallet.checked != true)
+                iSettlement += iWallet;
+        }
+        txtSettlement.value = iSettlement;
+
+        oFeeInfo.Settlement = iSettlement;
+        oFeeInfo.MonthlyFee = iMonthlyFee;
+    }
+
+    function OpenFeeRegister(iMonth) {
+        debugger
+        oFeeInfo.RegistrationId = parseInt(document.getElementById("txtEnrollmentNo").value);
+        oFeeInfo.StdId = parseInt(document.getElementById("txtStdId").value);
+        oFeeInfo.Class = parseInt(document.getElementById("txtClass").value);
+        oFeeInfo.ForMonth = iMonth;
+        oFeeInfo.Year = parseInt(document.getElementById("txtYear").value);
+        oFeeInfo.Date = Date.now();
+
+        document.getElementById("dvFeeDetails").style.display = 'none';
+        document.getElementById("dvSaveFee").style.display = 'block';
+
+        oFeeInfo.Settlement = -1;
+    }
+    function Close() {
+        document.getElementById("dvSaveFee").style.display = 'none';
+        document.getElementById("dvFeeDetails").style.display = 'block';
+    }
+
+    function BackToFeeSubmission(iSubModule) {
+        debugger
+        //here 24 : SubModule.AllStudents
+        if (iSubModule == 24) {
+            COMMONMETHODS.ShowToastAsAlert("Not implemented.");
+            return;
+        }
+        var url = "@Url.Action("FeeSubmission", "Accounts")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "html",
+            data: {
+
+            },
+            success: function (data) {
+                successBackToFeeSubmission(true, data);
+            }
+        });
+    }
+    function successBackToFeeSubmission(bSuccess, data) {
+        debugger
+        $("#dvAccounts").html(data);
+
+    }
+
+
+    //SaveFees
+    function SaveFees() {
+        debugger;
+        if (oFeeInfo == null || oFeeInfo == undefined || oFeeInfo.MonthlyFee == undefined || oFeeInfo.MonthlyFee == 0) {
+            COMMONMETHODS.ShowToastAsAlert("Something is wrong.")
+            return;
+        }
+        var url = "@Url.Action("SaveFee", "Accounts")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: {
+                oFeeInfo: oFeeInfo
+            },
+            success: function (data) {
+                COMMONMETHODS.SaveStatus(true, data);
+            }
+        });
+    }
+</script>

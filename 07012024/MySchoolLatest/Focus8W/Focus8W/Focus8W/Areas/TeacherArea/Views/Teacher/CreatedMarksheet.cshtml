@@ -1,0 +1,249 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model Marks[]
+@{
+    int iColSpan = 0;
+    string tBodyId = "";
+
+    Marks oMarks = new Marks();
+    Marks[] lstMarkSheet = Model;
+    SemesterData objSemesterData = new SemesterData();
+    tBodyId = "tBodyMarksheet";
+}
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Teacher, Value: (int)SubModule.CreateDMarksheet))
+
+    <div class="row">
+        <table class="ReportTable table-bordered">
+
+            @* 1 *@
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Student Details</th>
+                    @*CREATE : SubjectsColumn*@
+                    @{
+                        if (lstMarkSheet != null && lstMarkSheet.Length > 0)
+                        {
+                            string sExamType = "";
+                            int iExamType = 0;
+                            oMarks = lstMarkSheet[0];
+
+                            iColSpan = oMarks.SemesterData[0].arrSubjectMarks.Length;
+                            for (int iCol = 0; iCol < oMarks.SemesterData.Length; iCol++)
+                            {
+                                if (iExamType != oMarks.SemesterData[iCol].ExamType)
+                                {
+                                    iExamType = oMarks.SemesterData[iCol].ExamType;
+                                    if (iExamType == 1)
+                                    {
+                                        sExamType = "Test";
+                                    }
+                                    else if (iExamType == 2)
+                                    {
+                                        sExamType = "Half-yearly";
+                                    }
+                                    else if (iExamType == 3)
+                                    {
+                                        sExamType = "Annual";
+                                    }
+                                    else
+                                    {
+                                        iColSpan = 0;
+                                        sExamType = "Result";
+                                    }
+                                    <th colspan="@iColSpan" class="text-center">@sExamType</th>
+                                }
+                            }
+                            @*<th class="text-center">Result</th>*@
+                        }
+                    }
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>Roll no</th>
+                    <th>Name</th>
+                    @*CREATE : SubjectsColumn*@
+                    @{
+                        if (lstMarkSheet != null && lstMarkSheet.Length > 0)
+                        {
+                            oMarks = lstMarkSheet[0];
+                            //Dynamic Cols
+                            for (int iSemData = 0; iSemData < oMarks.SemesterData.Length; iSemData++)
+                            {
+                                IdValuePair[] arrSubjectsMarks = oMarks.SemesterData[iSemData].arrSubjectMarks;
+                                for (int iSubMark = 0; iSubMark < arrSubjectsMarks.Length; iSubMark++)
+                                {
+                                    <td class="text-center">@arrSubjectsMarks[iSubMark].Value</td>
+                                }
+                            }
+                        }
+
+                    }
+                </tr>
+            </thead>
+            @*<thead>
+                <tr>
+                    <th>Roll no</th>
+                    <th>Name</th>
+                    @*CREATE : SubjectsColumn*@
+            @{
+                @*if (lstMarkSheet != null && lstMarkSheet.Count > 0)
+                    {
+                        for (int iCol = 0; iCol < lstMarkSheet[0].Subjects.Length; iCol++)
+                        {
+                            <th>@lstMarkSheet[0].Subjects[iCol].SubjectName</th>
+                        }
+                    }
+                    <th class="text-center">Grand Total</th>*@
+            }
+            @*</tr>
+                </thead>*@
+
+            @*1*@
+            <tbody id="@tBodyId">
+                @{
+                    if (lstMarkSheet != null)
+                    {
+                        for (int iRow = 0; iRow < lstMarkSheet.Length; iRow++)
+                        {
+                            oMarks = lstMarkSheet[iRow];
+                            if (oMarks != null)
+                            {
+                                if (oMarks.SemesterData != null && oMarks.SemesterData.Length > 0)
+                                {
+                                    @*<tr>*@
+                                    <tr id="@oMarks.StdId" onclick="@oMarks.StdId > 0 ? COMMONMETHODS.SelectRow(this, '@tBodyId'):''">
+                                        @if (oMarks.StdId == -1)//GrandTotal
+                                        {
+                                            <th class="text-center" colspan="2">Grand Total</th>
+                                        }
+                                        else
+                                        {
+                                            <td>@oMarks.StdId</td>
+                                            <td>@oMarks.StdName</td>
+                                        }
+
+                                        @*CREATE : SubjectsColumn's Marks or Create dynamic column for Subject's Marks*@
+                                        @for (int iSemData = 0; iSemData < oMarks.SemesterData.Length; iSemData++)
+                                        {
+                                            objSemesterData = oMarks.SemesterData[iSemData];
+
+                                            //Dynamic Cols
+                                            IdValuePair[] arrSubjectsMarks = objSemesterData.arrSubjectMarks;
+                                            for (int iSubMark = 0; iSubMark < arrSubjectsMarks.Length; iSubMark++)
+                                            {
+                                                if (objSemesterData.ExamType == -1 || oMarks.StdId == -1)
+                                                {
+                                                    <th class="text-end">@arrSubjectsMarks[iSubMark].Id</th>
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-end">@arrSubjectsMarks[iSubMark].Id</td>
+                                                }
+                                            }
+                                        }
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*PENDING : Sroll marks column if subjects a lots off*@
+    <div class="row">
+        <div style="overflow: auto;width: auto;display:none">
+            <table class="ReportTable table-success table-striped" id="" style="left:0px;position:sticky;z-index:1;background-color:white;text-wrap: nowrap;">
+                <thead>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Student Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (lstMarkSheet != null)
+                        {
+                            for (int iRow = 0; iRow < lstMarkSheet.Length; iRow++)
+                            {
+                                oMarks = lstMarkSheet[iRow];
+                                <tr>
+                                    <td>@oMarks.StdId</td>
+                                    <td>@oMarks.StdName</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+
+
+
+
+            <table class="ReportTable">
+                <thead>
+                    @*<tr>
+                            @{
+                                if (lstMarkSheet != null && lstMarkSheet.Length > 0)
+                                {
+                                    for (int iCol = 0; iCol < lstMarkSheet[0].Subjects.Length; iCol++)
+                                    {
+                                        <th>@lstMarkSheet[0].Subjects[iCol].SubjectName</th>
+                                    }
+                                }
+                            }
+                        </tr>*@
+                </thead>
+                <tbody>
+                    @{
+                        @*if (lstMarkSheet != null)
+                            {
+                                for (int iRow = 0; iRow < lstMarkSheet.Count; iRow++)
+                                {
+                                    oSemesterData = lstMarkSheet[iRow].SemesterData;
+                                    for (int iSub = 0; iSub < oSemesterData.Length; iSub++)
+                                    {
+                                        objSemesterData = oSemesterData[iSub];
+                                        <tr>
+                                            @{
+                                                for (int iSubCol = 0; iSubCol < objSemesterData.arrSubjectMarks.Length; iSubCol++)
+                                                {
+                                                    //SubjectMark
+                                                    <th>@objSemesterData.arrSubjectMarks[iSubCol].Id</th>
+                                                }
+                                            }
+                                        </tr>
+                                                        }
+
+                                                    }
+                                                }*@
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

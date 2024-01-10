@@ -1,0 +1,43 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model StudentDetails[]
+
+@{
+    StudentDetails oStudentDetails = null;
+    StudentDetails[] lstStudents = Model;
+}
+
+<table class="ReportTable">
+    <thead>
+        <tr>
+            <th>Sr No</th>
+            <th>EnrollmentNo</th>
+            <th>StdId</th>
+            <th>StdName </th>
+            <th>Father Name</th>
+            <th>DOB</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (lstStudents != null && lstStudents.Length > 0)
+            {
+                for (int i = 0; i < lstStudents.Length; i++)
+                {
+                    oStudentDetails = lstStudents[i];
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@oStudentDetails.EnrollmentNo</td>
+                        <td>@oStudentDetails.StdId</td>
+                        <td>@oStudentDetails.StdName</td>
+                        <td>Dummy</td>
+                        <td>Dummy</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

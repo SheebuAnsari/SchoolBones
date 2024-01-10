@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+
+
+    @*START :: For Global Access : LoadAllJSFiles*@
+
+    @*Icons*@
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+    @*Bootstrap*@
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+
+    
+    @*JSFactory*@
+    <script src="~/JSFactory/Developer/Dev.js"></script>
+    
+    <script src="~/JSFactory/Admin/Admin.js"></script>
+    <script src="~/JSFactory/Admin/AdminServer.js"></script>
+    <script src="~/JSFactory/Admin/TimeTable.js"></script>
+
+    <script src="~/JSFactory/Common/CommonMethods.js"></script>
+    <script src="~/JSFactory/Common/CommonInput.js"></script>
+    <script src="~/JSFactory/Teacher/Teacher.js"></script>
+    <script src="~/JSFactory/Teacher/Marksheet.js"></script>
+    <script src="~/JSFactory/Admission/Admission.js"></script>
+
+    <script src="~/JSFactory/Account/Account.js"></script>
+    <script src="~/JSFactory/Account/AccountServer.js"></script>
+
+    <script src="~/JSFactory/Common/Attendance.js"></script>
+
+    <script src="~/JSFactory/Dashboard/DashboardJS.js"></script>
+    <script src="~/JSFactory/Dashboard/DashboardJServer.js"></script>
+
+
+    <script src="~/Scripts/CommonJS/Login.js"></script>
+    <script src="~/Scripts/CommonJS/CommonEnums.js"></script>
+    <script src="~/Scripts/CommonJS/CommonMethods.js"></script>
+    <script src="~/Scripts/CommonJS/SDate.js"></script>
+    <script src="~/Scripts/CommonJS/CoreJS.js"></script>
+    <script src="~/Scripts/CommonJS/CommonRibbon.js"></script>
+        
+    <script src="~/Scripts/Admin/RibbonControlAdmin.js"></script>
+    <script src="~/Scripts/Admin/AdminCommonJS.js"></script>
+
+    <script src="~/Scripts/Teacher/TeacherCommonJS.js"></script>
+    <script src="~/Scripts/Teacher/RibbonControlTeacher.js"></script>
+
+    <script src="~/Scripts/Account/AccountCommonJS.js"></script>
+    <script src="~/Scripts/Account/AccountRibbonJS.js"></script>
+    
+
+    @*CSSFactory*@
+    <link href="~/CSSFactory/IdCard.css" rel="stylesheet" />
+    <link href="~/CSSFactory/CommonCSS.css" rel="stylesheet" />
+
+
+
+    @*<link href="~/Content/MyCss/Login.css" rel="stylesheet" />*@
+
+
+</head>
+
+
+@{ 
+    string sLicenseError = Convert.ToString(TempData["LicenseError"]);
+}
+
+<body id="dvBody">
+    <div class="container-fluid">
+        <div class="fixed-top Navigation">
+            @*Header*@
+            <nav class="navbar navbar-expand-lg">
+                @*<span>
+                    <img src="~/Image/my-first-school.jpg" style="height: 40px;" />
+                </span>*@
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader" aria-controls="navHeader" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navHeader" style="background-color: aliceblue;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" onclick="location.href='@Url.Action("CreateSchool", "Home")'">Dev Tool</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" onclick="location.href='@Url.Action("Index", "Home")'">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#" onclick="GetPath()">Path</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="alert('MainLayout')">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                        <li class="nav-item bg-danger text-black">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">@sLicenseError</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        @*<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <input type="button" class="btn btn-outline-success" value="Logout" onclick="location.href='@Url.Action("Logout", "Home", new { id = 0 }))'" />*@
+                    </form>
+                </div>
+            </nav>
+
+            @*Body*@
+            <div class="container-fluid" id="dvRenderBody">
+                @RenderBody()
+            </div>
+        </div>
+
+       
+
+        @*<div class="FooterContent">
+            Footer
+        </div>*@
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)*@
+</body>
+
+</html>

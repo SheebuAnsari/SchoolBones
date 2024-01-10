@@ -1,0 +1,9 @@
+K:\SchoolErp\SchoolBones\DomLibrary\bin\Debug\DomLibrary.dll
+K:\SchoolErp\SchoolBones\DomLibrary\bin\Debug\DomLibrary.pdb
+K:\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.dll
+K:\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.pdb
+K:\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.csprojResolveAssemblyReference.cache
+F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\DomLibrary\bin\Debug\DomLibrary.dll
+F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\DomLibrary\bin\Debug\DomLibrary.pdb
+F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.dll
+F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.pdb

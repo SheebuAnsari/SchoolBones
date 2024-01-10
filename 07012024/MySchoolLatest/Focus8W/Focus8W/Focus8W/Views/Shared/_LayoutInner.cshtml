@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="fixed-top Navigation">
+        @*Header*@
+        <nav class="navbar navbar-expand-lg">
+            <span>
+                <img src="~/Image/my-first-school.jpg" style="height: 40px;" />
+            </span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader" aria-controls="navHeader" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navHeader" style="background-color: aliceblue;">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        @*<a class="nav-link active" aria-current="page" href="#">Home</a>*@
+                        <a class="nav-link active" aria-current="page" href="#" onclick="alert('Not implemented')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#" onclick="GetPath()">Path</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="alert('InnerLayout')">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input type="button" class="btn btn-outline-success" value="Logout" onclick="location.href='@Url.Action("Logout", "Home", new { id = 0 }))'" />
+                    @*<input class="btn btn-primary" type="button" value="Logout" data-url-logout ="@Url.Action("Logout","Home")" onclick="LOGIN.Logout(this)">*@
+                </form>
+            </div>
+        </nav>
+
+        @*Body*@
+        <div class="container-fluid" id="dvRenderBody">
+            @RenderBody()
+        </div>
+    </div>
+
+
+
+    @*<div class="FooterContent">
+            Footer
+        </div>*@
+</div>

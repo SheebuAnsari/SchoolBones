@@ -1,0 +1,56 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model IdValuePair
+@{
+    string tBodyId = "";
+    IdValuePair objData = Model;
+    int iClass = objData.Id;
+    Subject[] lstSubject = (Subject[])objData.Value;
+    tBodyId = "tbodyAddSubject";
+}
+
+<input type="hidden" id="hdnClass" value="@iClass" />
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Teacher, Value: (int)SubModule.AddSubjects))
+
+    <div class="row">
+        <table class="ReportTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Subject Id</th>
+                    <th>Subject Name</th>
+                    <th>Max Mark</th>
+                </tr>
+            </thead>
+            <tbody id="@tBodyId">
+                @{
+                    if (lstSubject != null)
+                    {
+                        for (int iRow = 0; iRow < lstSubject.Length; iRow++)
+                        {
+                            <tr id="@lstSubject[iRow].SubjectId" onclick="COMMONMETHODS.SelectRow(this, '@tBodyId')">
+                                <th>@(iRow + 1)</th>
+                                <td>@lstSubject[iRow].SubjectId</td>
+                                <td>@lstSubject[iRow].SubjectName</td>
+                                <td>@lstSubject[iRow].MaximumMarks</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="dvContainerAddSubject">
+
+    </div>
+</div>
+
+
+<script>
+    lstSubject = @Html.Raw(Json.Encode(lstSubject));
+</script>
+

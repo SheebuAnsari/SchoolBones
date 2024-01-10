@@ -1,0 +1,199 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model MarkSheet
+
+@{
+    Inputs oInputs = null;
+    MarkSheet lstMarkSheet = null;
+    StudentAttendance oStudentDS = null;
+    Subject[] lstSubject = null;
+    StudentAttendance[] lstStudent = null;
+
+
+    lstMarkSheet = Model;
+
+    if (lstMarkSheet != null)
+    {
+        oInputs = lstMarkSheet.Inputs;
+        if (lstMarkSheet.StudentAttendance != null && lstMarkSheet.Subjects != null)
+        {
+            lstStudent = lstMarkSheet.StudentAttendance;
+            lstSubject = lstMarkSheet.Subjects;
+
+        }
+    }
+}
+
+
+<input id="hdnClass" type="hidden" value="@oInputs.Class" />
+<input id="hdnYear" type="hidden" value="@oInputs.Year" />
+<input id="hdnExamType" type="hidden" value="@oInputs.ExamType" />
+
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Teacher, Value: (int)SubModule.CreateMarksheet))
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="control-label">Class : <b>@oInputs.Class</b></label>
+        </div>
+        <div class="col-3">
+            <label class="control-label">Year : <b>@oInputs.Year</b></label>
+        </div>
+        <div class="col-3">
+            <label class="control-label">ExamType : <b>@oInputs.ExamType</b></label>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row">
+        <table class="ReportTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Std Name</th>
+                    @*DefaultSubjects*@
+                    @*Subjects*@
+                    @{
+                        if (lstSubject != null)
+                        {
+                            for (int iSub = 0; iSub < lstSubject.Length; iSub++)
+                            {
+                                <th>@lstSubject[iSub].SubjectName</th>
+                            }
+                        }
+                    }
+                    @*<th>Physics</th>
+                        <th>Chemistry</th>
+                        <th>Mathmatics</th>*@
+                    <th>Prepared</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyMarks">
+                @{
+                    if (lstStudent != null)
+                    {
+                        for (int iRow = 0; iRow < lstStudent.Length; iRow++)
+                        {
+                            oStudentDS = lstStudent[iRow];
+                            <tr id="@oStudentDS.StdId">
+                                <td>@oStudentDS.StdId</td>
+                                <td>@oStudentDS.StdName</td>
+                                @{
+                                    for (int iSub = 0; iSub < lstSubject.Length; iSub++)
+                                    {
+                                        string sControlId = string.Format("{0}_{1}", lstSubject[iSub].SubjectName, iRow);
+                                        <td>
+                                            <input id="txt_@sControlId" type="text" value="" />
+                                        </td>
+                                    }
+                                }
+                                @*<td>
+                                        <input id="txtPhysics_@iRow" type="text" value="" />
+                                    </td>
+                                    <td>
+                                        <input id="txtChemistry_@iRow" type="text" value="" />
+                                    </td>
+                                    <td>
+                                        <input id="txtMath_@iRow" type="text" value="" />
+                                    </td>
+                                    @{
+                                        for (int iSub = 0; iSub < 5; iSub++)
+                                        {
+                                            <td>
+                                                <input id="txtMath_@iRow" type="text" value="" />
+                                            </td>
+                                        }
+                                    }*@
+                                <td>
+                                    <input id="chkPrepared_@iRow" type="checkbox" />
+                                </td>
+
+                            </tr>
+                                        }
+                                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        @{
+            if (lstStudent != null && lstSubject != null)
+            {
+                <input type="button" class="btn-outline-primary" onclick="SaveMarks()" value="Save Marks" />
+            }
+        }
+    </div>
+</div>
+
+<script>
+    lstSubject = @Html.Raw(Json.Encode(lstSubject));
+
+    function SaveMarks() {
+        debugger
+
+        var arrMarks = [];
+        var oSubjects = {};
+        var arrSubjects = [];
+        var Marks = {};
+
+        var tBody = document.getElementById("tbodyMarks");
+        var tableRows = tBody.children;
+        for (var iRow = 0; iRow < tableRows.length; iRow++) {
+            if(document.getElementById("chkPrepared_" + iRow).checked){
+                Marks = {};
+                oSubjects = {};
+                arrSubjects = [];
+                Marks.StdId = tableRows[iRow].id;
+                Marks.Class = parseInt(document.getElementById("hdnClass").value);
+                Marks.Year = parseInt(document.getElementById("hdnYear").value);
+                Marks.ExamType = parseInt(document.getElementById("hdnExamType").value);
+                for (var iSub = 0; iSub < lstSubject.length; iSub++) {
+                    oSubjects = lstSubject[iSub];
+                    if(document.getElementById("txt_"+lstSubject[iSub].SubjectName+"_" + iRow).value != ''){
+                        oSubjects.SubjectMark = parseInt(document.getElementById("txt_"+lstSubject[iSub].SubjectName+"_" + iRow).value); //Problem is here
+                        arrSubjects.push(oSubjects);
+                    }
+                }
+                Marks.Subjects = arrSubjects;
+                Marks.ResultPrepared = document.getElementById("chkPrepared_" + iRow).checked;
+                arrMarks.push(Marks);
+            }
+        }
+        debugger;
+        //var jsonData = JSON.stringify({'arrMarks' : arrMarks});
+
+        var url = "@Url.Action("SaveMarks", "Teacher")"
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: url,
+            //contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                //arrMarks: JSON.stringify(arrMarks)
+                arrMarks: arrMarks,
+            },
+            success: function (data) {
+                successSaveMarks(true, data);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        })
+    }
+
+    function successSaveMarks(bSuccess, data) {
+        debugger
+        if (bSuccess) {
+            if (data.iStatus > 0) {
+                COMMONMETHODS.ShowToastAsAlert("Saved");
+            }
+            else {
+                COMMONMETHODS.ShowToastAsAlert("Failed");
+            }
+        }
+    }
+</script>

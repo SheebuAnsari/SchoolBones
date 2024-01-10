@@ -1,0 +1,304 @@
+﻿@using SchoolBones
+@using SchoolBones.Enums
+@using SchoolBones.DataStructs
+@using SchoolBones.Common
+
+@model TimeTable
+@{
+    Registration[] arrTeachers = null;
+    Subject[] arrSubject = null;
+    RowWiseData[] arrRowData = null;
+    Cell[] arrCellData = null;
+
+
+    TimeTable oTimeTable = Model;
+    arrTeachers = oTimeTable.Teacher;
+    arrSubject = oTimeTable.Subjects;
+    arrRowData = oTimeTable.RowData;
+    arrCellData = oTimeTable.CellData;
+}
+
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)Modules.Admin, Value: (int)SubModule.TimeTable))
+  
+    <div class="row">
+        <div class="col-md-3">
+            @{           
+            if (arrTeachers != null)
+            {
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            List of Available Teachers
+                        </li>
+                        @for (int i = 0; i < arrTeachers.Length; i++)
+                        {
+                            <li class="list-group-item" id="@arrTeachers[i].RegistrationId" data-name="@arrTeachers[i].UserName" draggable="true"
+                                ondragstart="DragStartLi(this, event)" ondragend="OndragendLi(this, event)">
+                                <label>@arrTeachers[i].UserName</label>
+                            </li>
+                        }
+                    </ul>
+                }
+            }
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Year</label>
+                    <select id="ddlYear" class="form-select">
+                        <option value="-1">--Year--</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option selected value="2023">2023</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Class</label>
+                    <select id="ddlClass" class="form-select" onchange="ClasswiseTimeTable()">
+                        <option selected value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Class</label>
+                    <input id="txtCreatedDate" type="date" class="form-control" placeholder="yyyy-mm-dd" value="" @*min="2020-01-01" max="2023-12-31"*@ />
+                </div>
+                <div class="col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Created Date : </label>@DateDS.IntToDate(oTimeTable.CreatedDate, 1).Date.ToString("dd/MM/yyyy")
+                </div>
+                
+            </div>
+
+
+            @*Row : 6 Column : 5*@
+
+            <div id="dvTimeTableData" class="row">
+                @Html.Partial("_TimeTableData", arrCellData)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="popupTeacherSubject" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul id="lstSubjects"></ul>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="SelectSubject()">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var DAYS = 6; //or rows
+    var dvINFOINDEX = 0;
+    var eleListItem = undefined;
+    var targetId = '';
+    var iTeacherId = 0;
+    var sTeacherName = 0;
+    var sSelectedSubName = 0;
+    var arrSubjects = @Html.Raw(Json.Encode(arrSubject));
+
+
+    function DragStartLi(eleLi, evt) {        
+        //debugger          
+        //COMMONMETHODS.ShowToastAsAlert("Drag Start Li");          
+        srcListItem = eleLi;          
+        GetTeacherAttributes(eleLi, evt);  //Take attribute of ORIGIN      
+    }
+
+    function OndragendLi(eleLi, evt) {          
+        //debugger          
+        COMMONMETHODS.ShowToastAsAlert("On drag end Li and target id : " + targetId);          
+        if (IsTeacherAvailable() == true) {
+            let list = document.getElementById("lstSubjects");
+            list.style = "list-style: none;";
+            list.innerHTML = '';
+            for (var iSub = 0; iSub < arrSubjects.length; iSub++) {
+                let li = document.createElement('li');
+
+                let dvCheckbox = document.createElement('div');
+                dvCheckbox.className = 'form-check';
+                var rdo = document.createElement("INPUT");
+                rdo.setAttribute("type", "radio");
+                rdo.setAttribute("onclick", "GetSubject(this)");
+                rdo.id = 'rdoSubject' + iSub;
+                rdo.name = 'rdoSubject';
+                rdo.value = arrSubjects[iSub].SubjectName;
+                rdo.className = 'form-check-input';
+
+                var lblCaption = document.createElement('label');
+                lblCaption.className = 'form-check-label';
+                lblCaption.htmlFor = 'rdoSubject' + iSub;
+                lblCaption.innerText = arrSubjects[iSub].SubjectName;
+
+                dvCheckbox.appendChild(rdo);
+                dvCheckbox.appendChild(lblCaption);
+                li.appendChild(dvCheckbox);
+                list.appendChild(li);
+            }
+
+            //Open TeacherExpertSubject popup
+            $('#popupTeacherSubject').appendTo("body").modal('show');
+
+            //Drop Teacher in cell if Subject are selected and click on OK
+            //Drop(eleLi, evt)
+        } else {
+            alert("Stop")
+        }
+    }
+
+
+    function IsTeacherAvailable() {
+        debugger;
+        var ColId = targetId.split('_')[1];
+        for (var iRow = 1; iRow <= DAYS; iRow++) {
+            ///Read all cell of column ColId
+            ///Create cellId using ColId and loop
+            var cellId = "R" + iRow + "_" + ColId;
+            if (cellId != targetId) {
+                if (document.getElementById(cellId).children[dvINFOINDEX] != undefined) {
+                    var iRegId = document.getElementById(cellId).children[dvINFOINDEX].getAttribute("data-regid");
+                    if (iRegId == iTeacherId) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    function OndragoverCell(eleLi, evt) {
+        //debugger
+        //targetId = evt.target.id;
+        targetId = evt.currentTarget.id;
+    }
+
+    function Drop(eleLi, evt) {
+        debugger;
+        var targetEleTd = document.getElementById(targetId);
+        targetEleTd.innerHTML='';
+        var dvTdInfo = document.createElement('div');
+        dvTdInfo.innerHTML = '';
+        dvTdInfo.className='row text-center';
+        dvTdInfo.setAttribute("data-regid", iTeacherId);
+        dvTdInfo.setAttribute("data-name", sTeacherName);
+        dvTdInfo.setAttribute("data-subjectname", sSelectedSubName);
+        //SetAttribute
+        var span = '';
+        span = document.createElement('span');
+        //span.setAttribute("data-regid", iTeacherId);
+        //span.setAttribute("data-name", sTeacherName);
+        span.textContent = sTeacherName;
+        //dvTdInfo.innerHTML = '';
+        dvTdInfo.appendChild(span);
+
+      
+
+        //AddSubject in cell
+        span = '';
+        span = document.createElement('span');
+        //span.setAttribute("data-subjectname", sSelectedSubName);
+        span.textContent = '['+sSelectedSubName+']';
+        dvTdInfo.appendChild(span);
+        targetEleTd.appendChild(dvTdInfo);
+
+    }
+    function GetTeacherAttributes(eleLi, evt) {
+        iTeacherId = parseInt(eleLi.id);
+        sTeacherName = eleLi.getAttribute("data-name");
+    }
+    function ClasswiseTimeTable() {
+        debugger;
+        var iClass = parseInt(document.getElementById("ddlClass").value);
+        var url = "@Url.Action("TimeTableData", "Admin")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "GET",
+            dataType: "html",
+            data: {
+                iClass: iClass,
+            },
+            success: function (data) {
+                document.getElementById("dvTimeTableData").innerHTML = data;
+            }
+        });
+    }
+
+
+    @*function UpdateTimeTable() {
+        debugger;
+        var iCreatedDate = 0;
+        var iClass = 0;
+        iCreatedDate = FDate.convertDateToInt(document.getElementById("txtCreatedDate").value, "yyyy-mm-dd", 0);
+        iClass = parseInt(document.getElementById("ddlClass").value);
+        var oTimeTable = {}; oTimeTable.Class = iClass;
+        oTimeTable.CreatedDate = iCreatedDate;
+        oTimeTable.RowData = GetRowData();
+        var url = "@Url.Action("SaveTimeTable", "Admin")";
+        $.ajax({
+            url: url, cache: false, type: "POST", dataType: "html",
+            data: { oTimeTable: oTimeTable, },
+            success: function (data) {
+                COMMONMETHODS.ShowToastAsAlert("Data saved successfully");
+            }
+        });
+    }*@
+
+    function GetRowData() {
+        debugger;
+        var arrRowWiseData = [];
+        var eleRows = document.getElementById("tbodyTimeTable").children;
+        //Note skip Row:0 becoz this is header, and also skip Col:0 that is for Days
+        for (var iRow = 0; iRow < eleRows.length; iRow++) {
+            var cellData = [];
+            var oRowData = {};
+            var eleCols = eleRows[iRow].children;
+            for (var iCol = 1; iCol < eleCols.length; iCol++) {
+                var oCell = {};
+                if (eleCols[iCol].children[dvINFOINDEX] != undefined) {
+                    if (parseInt(eleCols[iCol].children[dvINFOINDEX].getAttribute("data-regid")) > 0 && eleCols[iCol].children[dvINFOINDEX].getAttribute("data-name") != null) {
+                        oCell.RowId = (iRow + 1);
+                        oCell.ColId = iCol;
+                        oCell.RegId = parseInt(eleCols[iCol].children[dvINFOINDEX].getAttribute("data-regid"));
+                        oCell.Name = eleCols[iCol].children[dvINFOINDEX].getAttribute("data-name");
+                        oCell.SubjectName = eleCols[iCol].children[dvINFOINDEX].getAttribute("data-subjectname");
+                        cellData.push(oCell);
+                    }
+                }
+            }
+            oRowData.Day = (iRow + 1);
+            oRowData.CellData = cellData;
+            arrRowWiseData.push(oRowData);
+        }
+        return arrRowWiseData;
+    }
+    function GetSubject(eleRdo) {
+        debugger;
+        sSelectedSubName  = eleRdo.value
+    }
+    function SelectSubject() {
+        debugger;
+        //Drop(eleLi, evt)
+        Drop(eleListItem, null)
+    }
+</script>

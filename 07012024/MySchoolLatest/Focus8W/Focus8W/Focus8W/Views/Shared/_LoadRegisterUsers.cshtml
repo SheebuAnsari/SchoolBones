@@ -1,0 +1,29 @@
+﻿@using SchoolBones
+@using SchoolBones.Enums
+
+@model DoubleIntValue
+@{ 
+    string tBodyId = "";
+    DoubleIntValue oRegUsers = null;
+    Modules eModules = Modules.Developer;
+    SubModule eSubModule = SubModule.None;
+    Registration[] arrRegisteredUsers = null;
+
+    oRegUsers = Model;
+    if (oRegUsers != null)
+    {
+        eModules = (Modules)oRegUsers.Id1;
+        tBodyId = "tBodyId_" + eModules.ToString();
+        eSubModule = (SubModule)oRegUsers.Id2;
+        arrRegisteredUsers = (Registration[])oRegUsers.Value;
+    }
+
+}
+
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)eModules, Value: (int)eSubModule))
+
+    <div id="dvLoadRegisteredUser">
+        @Html.Partial("~/Views/CommonViews/_LoadRegUser.cshtml", Model)
+    </div>
+</div>

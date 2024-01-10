@@ -1,0 +1,60 @@
+﻿@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+@using SchoolBones.Common
+
+@model FeeInfo
+@{
+    FeeInfo oFeeInfo = Model;
+}
+<div class="container">
+    <h4>_SaveFee</h4>
+    <div class="row">
+        <div class="col-md-3">
+            Show Details
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <label class="control-label">Enter Amount</label>
+                <input id="txtMonthlyFee" type="text" class="form-control" placeholder="200" />
+            </div>
+            <input class="btn btn-primary" type="button" value="Save" onclick="SaveFee()">
+        </div>
+    </div>
+</div>
+
+<script>
+    var objFeeInfo = @Html.Raw(Json.Encode(oFeeInfo));
+    @*var objFeeInfo=undefined;
+    $(document).ready(function () {
+        debugger;
+        objFeeInfo = @Html.Raw(Json.Encode(oFeeInfo));
+    });*@
+
+    function SaveFee(){
+        objFeeInfo.MonthlyFee = parseInt(document.getElementById("txtMonthlyFee").value);
+
+        var url = "@Url.Action("SaveFee", "Accounts")";
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            data: {
+                oFeeInfo: objFeeInfo
+            },
+            success: function (data) {
+                debugger;
+                successSaveFee(true, data);
+            }
+        });
+    }
+    function successSaveFee(bSuccess, data) {
+        debugger;
+        if(data.iStatus>0){
+            COMMONMETHODS.ShowToastAsAlert("Saved");
+        }else{
+            COMMONMETHODS.ShowToastAsAlert("Failed");
+        }
+    }
+</script>

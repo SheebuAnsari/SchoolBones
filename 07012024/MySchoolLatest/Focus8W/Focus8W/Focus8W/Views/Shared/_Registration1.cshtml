@@ -1,0 +1,66 @@
+﻿@*@using SchoolBones
+@using SchoolBones.Enums
+@model DoubleIntValue
+    @{ 
+        DoubleIntValue oData = null;
+        Modules eModules = Modules.Developer;
+        SubModule eSubModule = SubModule.None;
+        Registration[] arrRegisteredUsers = null;
+
+
+        oData = Model;
+        if (oData != null)
+        {
+            eModules = (Modules)oData.Id1;
+            eSubModule = (SubModule)oData.Id2;
+            arrRegisteredUsers = (Registration[])oData.Value;
+        }
+    }
+<div class="row">
+    @Html.Partial("_HeaderNavigation", new DoubleInt(Id: (int)eModules, Value: (int)eSubModule))
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="control-label">User Name</label>
+            <input id="txtUserName" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Login Name</label>
+            <input id="txtLoginName" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">User Password</label>
+            <input id="txtUserPassword" type="text" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">User Type</label>
+            <select id="ddlUserType" class="form-select">
+                @if (eModules == Modules.Admin)
+                {
+                    <option value='2' selected>Teacher</option>
+                    <option value='3'>Student</option>
+                }
+                else
+                {
+                    <option value='3'>Student</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">          
+            <label id="lblRegId" for="" class="form-label"></label>
+        </div>
+    </div>
+    <div class="col-md-8" >
+        @Html.Partial("~/Views/CommonViews/_LoadRegUser.cshtml", Model)
+    </div>
+</div>
+
+
+<script>
+    var arrRegisteredUsers = [];
+    arrRegisteredUsers = @Html.Raw(Json.Encode(arrRegisteredUsers));
+</script>*@

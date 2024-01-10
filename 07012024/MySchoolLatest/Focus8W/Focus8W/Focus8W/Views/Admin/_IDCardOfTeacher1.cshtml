@@ -1,0 +1,31 @@
+﻿@*@using SchoolBones
+@using DomLibrary;
+@using SchoolBones.Enums
+
+@model TeacherDetails
+@{
+    TeacherDetails oTeacher = Model;
+}
+<div class="col-md-3">
+    <div class="id-card-holder">
+        <div class="id-card">
+            <div class="header">
+                <img src="~/Image/Home.jpg">
+            </div>
+            <div class="photo">
+                <img src="~/Image/User.png">
+            </div>
+            <h4>@oTeacher.Name</h4>
+            <div class="qr-code">
+                <img src="~/Image/QR.png">
+            </div>
+            <h6>www.MySchool.info</h6>
+            <hr>
+            <p><strong>Address : </strong>HOUSE,4th Floor, TC 11/729(4), Division Office Road <p>
+            <p>Near PMG Junction, Thiruvananthapuram Kerala, India</p>
+            <p>Ph: 9446062493 | E-mail: info@onetikk.info</p>
+
+        </div>
+    </div>
+
+</div>*@
