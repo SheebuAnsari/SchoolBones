@@ -47,5 +47,9 @@ namespace UI
         {
             Console.WriteLine("This is test method.");
         }
+        public static void TEST3()
+        {
+            Console.WriteLine("This is test method.");
+        }
     }
 }
