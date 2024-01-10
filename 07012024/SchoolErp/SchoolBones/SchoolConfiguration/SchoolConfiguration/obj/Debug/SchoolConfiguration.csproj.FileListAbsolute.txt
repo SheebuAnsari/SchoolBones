@@ -10,3 +10,8 @@ F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolCo
 F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\obj\Debug\SchoolConfiguration.pdb
 F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\bin\Debug\SchoolConfiguration.dll
 F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\bin\Debug\SchoolConfiguration.pdb
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\bin\Debug\SchoolConfiguration.dll
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\bin\Debug\SchoolConfiguration.pdb
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\obj\Debug\SchoolConfiguration.csprojResolveAssemblyReference.cache
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\obj\Debug\SchoolConfiguration.dll
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolConfiguration\SchoolConfiguration\obj\Debug\SchoolConfiguration.pdb

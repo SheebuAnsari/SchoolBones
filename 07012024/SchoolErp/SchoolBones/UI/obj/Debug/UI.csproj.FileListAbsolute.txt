@@ -19,3 +19,10 @@ F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.pdb
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\UI.exe.config
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.exe
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.pdb
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\UI.exe
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\UI.pdb
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\DomLibrary.dll
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\SchoolBones.dll
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\SchoolConfiguration.dll
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\SchoolConfiguration.pdb
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache

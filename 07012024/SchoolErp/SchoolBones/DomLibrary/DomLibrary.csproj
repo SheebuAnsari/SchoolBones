@@ -44,6 +44,7 @@
     <Compile Include="AdminDS.cs" />
     <Compile Include="CommonDS.cs" />
     <Compile Include="CoreDS.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="MenuDom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentDS.cs" />
