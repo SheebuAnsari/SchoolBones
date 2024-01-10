@@ -16,3 +16,6 @@ F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\UI\bin\Debug\SchoolConfigura
 F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
 F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.exe
 F:\BackupPathshala_H\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.pdb
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\bin\Debug\UI.exe.config
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.exe
+E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\UI\obj\Debug\UI.pdb

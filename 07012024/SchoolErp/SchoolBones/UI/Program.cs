@@ -12,6 +12,8 @@ namespace UI
     {
         static void Main(string[] args)
         {
+            TEST();
+
             string sError = "";
             string sFilePath = "";
             do
@@ -38,6 +40,11 @@ namespace UI
                 MenuAction.MenuList();
 
             Console.ReadLine();
+        }
+
+        public static void TEST()
+        {
+            Console.WriteLine("This is test method.");
         }
     }
 }
