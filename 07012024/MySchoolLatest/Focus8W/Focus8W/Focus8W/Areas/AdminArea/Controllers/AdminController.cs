@@ -266,11 +266,6 @@ namespace Focus8W.Areas.AdminArea.Controllers
             return PartialView("CreateTimeTable", oTimeTable);
         }
 
-
-
-        
-      
-
         public ActionResult TimeTableDataNew()
         {
             TimeTableLayout[] arrTimeTableLayout = oAdminDML.LoadTimeTableLayout();
@@ -303,25 +298,8 @@ namespace Focus8W.Areas.AdminArea.Controllers
             TimeTableLayout[] arrTimeTableLayouts = oAdminDML.LoadTimeTableLayout();
             return PartialView("_LoadTimeTableLayouts", arrTimeTableLayouts);
         }
-        
-        
-
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
         ////public ActionResult FilterMenus(Modules eModule)
         ////{
@@ -341,84 +319,11 @@ namespace Focus8W.Areas.AdminArea.Controllers
         ////    return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
         ////}
 
-        ////public ActionResult AddTeacher()
-        ////{
-        ////    DoubleIntValue oDoubleIntValue = null;
-        ////    //Registration[] arrRegisteredUsers = null;
-
-        ////    //arrRegisteredUsers = oTeacherDML.LoadRegisteredUsers((int)Modules.Teacher);
-        ////    //oDoubleIntValue = new DoubleIntValue(Id1: (int)Modules.Admin, Id2: (int)SubModule.AddTeacher, Value: arrRegisteredUsers);
-        ////    oDoubleIntValue = CommonMethod.LoadRegUser((int)Modules.Admin, (int)SubModule.AddTeacher);
-        ////    return PartialView("_LoadRegisterUsers", oDoubleIntValue);
-        ////}
-
-
         ////public ActionResult SaveTeacher(SchoolBones.DataStructs.TeacherDetails oTeacherDetails)
         ////{
         ////    oSaveStatus = oAdminDML.SaveTeacherDetails(oTeacherDetails);
         ////    return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
         ////}
-
-
-
-
-
-
-        ////public ActionResult StudentsIdCards()
-        ////{
-        ////    TeacherController oTeacherController = new TeacherController();
-        ////    return oTeacherController.StudentsIdCards();
-        ////    //[] lstStudents = oTeacherDML.LoadActiveInActiveStudents(true);
-        ////    //return PartialView("_IDCardOfStudents", lstStudents);
-        ////}
-
-
-
-        ////public ActionResult OpenAttandenceRegister()
-        ////{
-        ////    List<TeacherDetails> lstTeacherDetails = new List<TeacherDetails>();
-        ////    lstTeacherDetails = oAdminDML.LoadTeacherDetails(true);
-        ////    return Json(lstTeacherDetails, JsonRequestBehavior.AllowGet);
-        ////}
-
-
-
-
-        ////public ActionResult CreateTimeTableOLD()
-        ////{
-        ////    TeacherDetails[] lstTeacherDetails = null;
-        ////    lstTeacherDetails = oAdminDML.LoadActiveInActiveTeachers(true);
-
-        ////    return PartialView("_TimeTable", lstTeacherDetails);
-        ////}
-
-
-
-
-
-
-        //#region Registration
-        ////public ActionResult TeacherRegistration()
-        ////{
-        ////    DoubleIntValue oData = null;
-        ////    oData = CommonMethod.LoadRegUser((int)Modules.Admin, (int)SubModule.Registration);
-        ////    return PartialView("_Registration", oData);
-        ////}
-
-
-        ////public ActionResult DeleteRegistration(int iRegId)
-        ////{
-        ////    if (iRegId > 0)
-        ////    {
-        ////        oSaveStatus = oAdminDML.DeleteRegistration(iRegId);
-        ////        return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
-        ////    }
-        ////    else
-        ////    {
-        ////        return Json("Something wrong", JsonRequestBehavior.AllowGet);
-        ////    }
-        ////}
-
         //#endregion
     }
 }

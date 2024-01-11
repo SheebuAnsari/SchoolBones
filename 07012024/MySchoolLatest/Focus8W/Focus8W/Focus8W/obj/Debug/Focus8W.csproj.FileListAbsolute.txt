@@ -544,3 +544,4 @@ F:\BackupPathshala_H\SchoolBones\07012024\MySchoolLatest\Focus8W\Focus8W\Focus8W
 F:\BackupPathshala_H\SchoolBones\07012024\MySchoolLatest\Focus8W\Focus8W\Focus8W\bin\Microsoft.Owin.Security.Google.xml
 F:\BackupPathshala_H\SchoolBones\07012024\MySchoolLatest\Focus8W\Focus8W\Focus8W\bin\Microsoft.Owin.Security.Twitter.xml
 F:\BackupPathshala_H\SchoolBones\07012024\MySchoolLatest\Focus8W\Focus8W\Focus8W\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\BackupPathshala_H\SchoolBones\07012024\MySchoolLatest\Focus8W\Focus8W\Focus8W\obj\Debug\Focus8W.csprojResolveAssemblyReference.cache
