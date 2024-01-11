@@ -19,12 +19,14 @@ namespace UI
             do
             {
                 sError = "";
-                sFilePath = @"C:\Users\Venkateshwar\Desktop\CoreFiles";
 
                 Console.Write("\nEnter FileFolder path : ");
                 Console.WriteLine("Default path : {0}", sFilePath);
-                Console.ReadLine();
-
+                sFilePath = Console.ReadLine();
+                if(string.IsNullOrEmpty(sFilePath) == true)
+                {
+                    sFilePath = @"C:\Users\Mohd Sheebu\Desktop\FileFactory";
+                }
                 ConnectionHelper.SetConString(ref sError, 1, sFilePath);
 
                 if (string.IsNullOrEmpty(sError) == false)
