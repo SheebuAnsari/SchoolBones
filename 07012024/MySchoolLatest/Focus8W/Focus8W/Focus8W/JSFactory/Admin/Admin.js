@@ -259,4 +259,18 @@ var ADMIN = {
         debugger;
         COMMONMETHODS.ShowToastAsAlert("Not implemented.");
     },
+
+    //===========
+    GetTeacherIds: function (ele, iTeacherId) {
+        debugger;
+        if (ele.checked) {
+            arrTeacherIds.push(iTeacherId);
+        } else {
+            for (var i = 0; i < arrTeacherIds.length; i++) {
+                if (iTeacherId == arrTeacherIds[i])
+                    break;
+            }
+            arrTeacherIds.splice(i, 1);
+        }
+    },
 }

@@ -2,7 +2,7 @@
 using Focus8W.BL;
 using SchoolBones;
 using SchoolBones.Common;
-using SchoolBones.Enums;
+
 
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace Focus8W.Areas.DeveloperArea.Controllers
             oSaveStatus = oCoreDML.SaveMenu(oMenu);
             return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult MenuCRUD(CRUD eAction, IdValuePair oMenu)
+        public ActionResult MenuCRUD(DomLibrary.CRUD eAction, IdValuePair oMenu)
         {
             //1 : Delete, 2 : Update
 

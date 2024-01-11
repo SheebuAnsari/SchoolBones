@@ -36,3 +36,15 @@ E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\De
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\obj\Debug\SchoolBones.csprojResolveAssemblyReference.cache
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\obj\Debug\SchoolBones.dll
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\obj\Debug\SchoolBones.pdb
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\SchoolBones.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\SchoolBones.pdb
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\DomLibrary.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\ICSharpCode.SharpZipLib.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\NPOI.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\NPOI.OOXML.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\NPOI.OpenXml4Net.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\NPOI.OpenXmlFormats.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\bin\Debug\DomLibrary.pdb
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\obj\Debug\SchoolBones.csprojResolveAssemblyReference.cache
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\obj\Debug\SchoolBones.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\SchoolBones\obj\Debug\SchoolBones.pdb

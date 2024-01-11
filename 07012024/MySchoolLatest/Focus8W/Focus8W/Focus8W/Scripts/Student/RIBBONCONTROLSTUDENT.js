@@ -1,3 +1,0 @@
-﻿//var arrIdStatusPair = [];
-//var arrStudnetIds = [];
-

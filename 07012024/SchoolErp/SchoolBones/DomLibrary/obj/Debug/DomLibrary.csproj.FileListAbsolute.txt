@@ -12,3 +12,7 @@ E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\bin\Deb
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.csprojResolveAssemblyReference.cache
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.dll
 E:\SheebuDownloads\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.pdb
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\bin\Debug\DomLibrary.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\bin\Debug\DomLibrary.pdb
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.dll
+F:\BackupPathshala_H\SchoolBones\07012024\SchoolErp\SchoolBones\DomLibrary\obj\Debug\DomLibrary.pdb

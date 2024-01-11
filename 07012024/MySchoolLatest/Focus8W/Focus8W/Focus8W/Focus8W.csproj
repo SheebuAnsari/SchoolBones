@@ -273,33 +273,19 @@
     <Compile Include="BL\TestingDML.cs" />
     <Compile Include="BL\TestingExecuteDML.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Accounts\AccountsController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
-    <Compile Include="Controllers\Admission\AdmissionController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CommonMethod.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
-    <Compile Include="Controllers\Teacher\TeacherController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="DataStruct\AccountsDS.cs" />
-    <Compile Include="DataStruct\CommonDS.cs" />
-    <Compile Include="DataStruct\DateDS.cs" />
-    <Compile Include="DataStruct\Enums.cs" />
-    <Compile Include="DataStruct\ExportData.cs" />
-    <Compile Include="DataStruct\StudentDS.cs" />
-    <Compile Include="DataStruct\TeacherDS.cs" />
-    <Compile Include="DataStruct\TestingDS.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\GLOBAL.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AdminDS.cs" />
-    <Compile Include="Models\CommonModels.cs" />
-    <Compile Include="Models\CommonEnums.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -325,18 +311,10 @@
     <Content Include="JSFactory\Teacher\Marksheet.js" />
     <Content Include="JSFactory\Teacher\Teacher.js" />
     <Content Include="JSFactory\Teacher\TeacherServer.js" />
-    <Content Include="Scripts\Account\AccountCommonJS.js" />
-    <Content Include="Scripts\Account\AccountRibbonJS.js" />
-    <Content Include="Scripts\Admin\AdminCommonJS.js" />
     <Content Include="Scripts\CommonJS\CommonEnums.js" />
-    <Content Include="Scripts\CommonJS\CommonRibbon.js" />
     <Content Include="Scripts\CommonJS\CoreJS.js" />
     <Content Include="Scripts\CommonJS\Login.js" />
-    <Content Include="Scripts\Student\RIBBONCONTROLSTUDENT.js" />
-    <Content Include="Scripts\Admin\RibbonControlAdmin.js" />
     <Content Include="Scripts\CommonJS\SDate.js" />
-    <Content Include="Scripts\Teacher\RibbonControlTeacher.js" />
-    <Content Include="Scripts\Teacher\TeacherCommonJS.js" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -588,57 +566,19 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Students\StudentsIndex.cshtml" />
-    <Content Include="Views\Admin\_TeachersDetail1.cshtml" />
-    <Content Include="Views\Admin\_TeacherPayroll.cshtml" />
-    <Content Include="Views\Admin\_IDCardOfTeachers1.cshtml" />
-    <Content Include="Views\Admin\_IDCardOfTeacher1.cshtml" />
-    <Content Include="Views\Admin\_IDCardOfStudents1.cshtml" />
-    <Content Include="Views\Teacher\_AddStudent1.cshtml" />
-    <Content Include="Views\Teacher\_StudentsDetails1.cshtml" />
-    <Content Include="Views\Teacher\_DeleteStudentPermanent1.cshtml" />
-    <Content Include="Views\Teacher\_LoadAttendanceRegister1.cshtml" />
-    <Content Include="Views\Teacher\_CreateMarksheet1.cshtml" />
-    <Content Include="Views\Teacher\_PassFailStatus1.cshtml" />
-    <Content Include="Views\Accounts\_FeeSubmission.cshtml" />
-    <Content Include="Views\Accounts\_SaveFee1.cshtml" />
-    <Content Include="Views\Accounts\_ClasswiseStudents1.cshtml" />
-    <Content Include="Views\Accounts\_LoadClasswiseStudents1.cshtml" />
     <Content Include="Views\Shared\_CommonInputs.cshtml" />
-    <Content Include="Views\Admin\_IDCardStudent1.cshtml" />
     <Content Include="Views\Shared\_ToastAsAlert.cshtml" />
-    <Content Include="Views\Teacher\_LoadSubjects1.cshtml" />
     <Content Include="Views\Home\_Dashboard.cshtml" />
     <Content Include="Areas\DeveloperArea\Views\Developer\AddMenu.cshtml" />
     <Content Include="Views\Home\_SubDashboard.cshtml" />
-    <Content Include="Views\Admin\_LoadTeachersAttandenceRegister1.cshtml" />
     <Content Include="Views\Shared\_HeaderNavigation.cshtml" />
     <Content Include="Views\Shared\_CommonPopups.cshtml" />
-    <Content Include="Views\Teacher\_CreatedMarksheet1.cshtml" />
-    <Content Include="Views\Teacher\_DefineMaximumMarks1.cshtml" />
-    <Content Include="Views\Teacher\_DisplayMarksheet1.cshtml" />
-    <Content Include="Views\Teacher\_LoadMarksheet1.cshtml" />
-    <Content Include="Views\Shared\_Registration1.cshtml" />
-    <Content Include="Views\Admin\_AddTeacher1.cshtml" />
     <Content Include="Views\Shared\_LoadRegisterUsers.cshtml" />
-    <Content Include="Views\Teacher\_LoadActiveInActiveStudents1.cshtml" />
-    <Content Include="Views\Admin\_LoadActiveInActiveTeachers1.cshtml" />
     <Content Include="Views\Home\CreateSchool.cshtml" />
-    <Content Include="Views\Accounts\_FeesStructure1.cshtml" />
-    <Content Include="Views\Accounts\_LoadFeeDetails1.cshtml" />
-    <Content Include="Views\Admin\_TimeTable1.cshtml" />
     <Content Include="Views\Home\License.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Accounts\_DefineSalary1.cshtml" />
-    <Content Include="Views\Accounts\_LoadTeachersSalary1.cshtml" />
-    <Content Include="Views\Admin\_TimeTable11.cshtml" />
-    <Content Include="Views\Admin\_TimeTableData1.cshtml" />
-    <Content Include="Views\Admin\_TT1.cshtml" />
-    <Content Include="Views\Admin\_TTData1.cshtml" />
     <Content Include="Areas\AdmissionArea\Views\Shared\_LoadRegUser.cshtml" />
-    <Content Include="Views\Accounts\_FeeCollection1.cshtml" />
     <Content Include="Areas\DeveloperArea\Views\Developer\_TestIcons.cshtml" />
-    <Content Include="Views\Teacher\_SemesterWiseMarksheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -649,12 +589,7 @@
     <Folder Include="Areas\TeacherArea\Models\" />
     <Folder Include="IconFactory\" />
     <Folder Include="JSFactory\Core\" />
-    <Folder Include="Views\Admission\" />
-    <Folder Include="Views\CommonViews\" />
-    <Folder Include="Views\Common\" />
-    <Folder Include="Views\Developer\" />
     <Folder Include="Views\Module\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using SchoolBones.Admin;
 using SchoolBones.Teacher;
 using SchoolBones.Common;
-using SchoolBones.Enums;
+
 using SchoolBones.Account;
 using DomLibrary;
 
@@ -21,13 +21,7 @@ namespace Focus8W.Controllers.Admin
         AdminDML oAdminDML = new AdminDML();        //Can control Teacher
         TeacherDML oTeacherDML = new TeacherDML();  //Can control Student
         AccountsDML oAccountsDML = new AccountsDML();  //Can control Student
-
-        //public ActionResult FilterMenus(Modules eModule)
-        //{
-        //    arrMenu = oCoreDML.LoadMenu((int)eModule);
-        //    return PartialView("~/Views/Admin/_LoadMenus.cshtml", arrMenu);
-
-        //}
+        
         public ActionResult MenuOpeations(CRUD eAction, IdValuePair oMenu)
         {
             //1 : Delete, 2 : Update
@@ -40,23 +34,6 @@ namespace Focus8W.Controllers.Admin
             return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
         }
        
-        //public ActionResult AddTeacher()
-        //{
-        //    DoubleIntValue oDoubleIntValue = null;
-        //    //Registration[] arrRegisteredUsers = null;
-
-        //    //arrRegisteredUsers = oTeacherDML.LoadRegisteredUsers((int)Modules.Teacher);
-        //    //oDoubleIntValue = new DoubleIntValue(Id1: (int)Modules.Admin, Id2: (int)SubModule.AddTeacher, Value: arrRegisteredUsers);
-        //    oDoubleIntValue = CommonMethod.LoadRegUser((int)Modules.Admin, (int)SubModule.AddTeacher);
-        //    return PartialView("_LoadRegisterUsers", oDoubleIntValue);
-        //}
-        
-        
-        //public ActionResult SaveTeacher(SchoolBones.DataStructs.TeacherDetails oTeacherDetails)
-        //{
-        //    oSaveStatus = oAdminDML.SaveTeacherDetails(oTeacherDetails);
-        //    return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
-        //}
         public ActionResult TeachersDetail()
         {
             TeacherDetails[] arrTeacherDetails = null;
@@ -103,22 +80,6 @@ namespace Focus8W.Controllers.Admin
             lstTeacherDetails = oAdminDML.LoadActiveInActiveTeachers(true);
             return PartialView("_IDCardOfTeachers", lstTeacherDetails);
         }
-        //public ActionResult StudentsIdCards()
-        //{
-        //    //Image, TName,TId,TFaculty
-        //    //Make Id card only for thoses who is Active
-        //    StudentCurrentInfo[] lstStudents = oTeacherDML.LoadActiveInActiveStudents(true);
-        //    return PartialView("_IDCardOfStudents", lstStudents);
-        //}
-
-        //public ActionResult StudentsIdCards()
-        //{
-        //    TeacherController oTeacherController = new TeacherController();
-        //    return oTeacherController.StudentsIdCards();
-        //    //[] lstStudents = oTeacherDML.LoadActiveInActiveStudents(true);
-        //    //return PartialView("_IDCardOfStudents", lstStudents);
-        //}
-
         public ActionResult DeleteTeachers(IdStatusPair[] arrSelectedTechers, bool bDeletePermanent)
         {
             List<TeacherDetails> lstTeacherDetails = new List<TeacherDetails>();
@@ -136,14 +97,7 @@ namespace Focus8W.Controllers.Admin
         {
             DoubleInt oInputs = new DoubleInt(Id: (int)Modules.Admin, Value: (int)SubModule.TakeTeacherAttendanceInputs);
             return PartialView("_CommonInputs", oInputs);
-            //return PartialView("_CommonInputs", SubModule.TakeTeacherAttendanceInputs);
         }
-        //public ActionResult OpenAttandenceRegister()
-        //{
-        //    List<TeacherDetails> lstTeacherDetails = new List<TeacherDetails>();
-        //    lstTeacherDetails = oAdminDML.LoadTeacherDetails(true);
-        //    return Json(lstTeacherDetails, JsonRequestBehavior.AllowGet);
-        //}
 
         public ActionResult CallCommonPopupAdmin(TeacherDetails oTeacherDetails =null, AdmissionDetails objStudent = null, Subject oSubject = null, PopupName iPopupName = 0)
         {
@@ -153,23 +107,6 @@ namespace Focus8W.Controllers.Admin
                 popupData.Id = (int)iPopupName;
                 popupData.Value = oTeacherDetails;
             }
-            //if (iPopupName == PopupName.EditStudent)
-            //{
-            //    popupData.Id = (int)iPopupName;
-            //    popupData.Value = objStudent;
-            //}
-            //else if (iPopupName == PopupName.AddSubject)
-            //{
-            //    popupData.Id = (int)iPopupName;
-            //    popupData.Value = oSubject;
-            //}
-            //else if (iPopupName == PopupName.TakeStudentAttendance)
-            //{
-            //    List<StudentAttendance> lstStudent = oTeacherDML.LoadStudentForAttandence();
-            //    popupData.Id = (int)iPopupName;
-            //    popupData.Value = lstStudent;
-            //}
-            //else 
             if (iPopupName == PopupName.TakeTeacherAttendance)
             {
                 TeacherDetails[] lstTeacherDetails = null;
@@ -201,18 +138,7 @@ namespace Focus8W.Controllers.Admin
             return PartialView("_LoadTeachersAttandenceRegister", lstTeacherAttendance);
         }
        
-
         
-
-        //public ActionResult CreateTimeTableOLD()
-        //{
-        //    TeacherDetails[] lstTeacherDetails = null;
-        //    lstTeacherDetails = oAdminDML.LoadActiveInActiveTeachers(true);
-
-        //    return PartialView("_TimeTable", lstTeacherDetails);
-        //}
-
-
         #region TimeTableOLD
         public ActionResult CreateTimeTable()
         {
@@ -234,14 +160,6 @@ namespace Focus8W.Controllers.Admin
 
             return PartialView("_TimeTable", oTimeTable);
         }
-        //public ActionResult TimeTableData(int iClass = 1)
-        //{
-        //    Cell[] arrCell = null;
-        //    int iDate = 0;
-
-        //    arrCell = oAdminDML.LoadTimeTableData(iClass, ref iDate);
-        //    return PartialView("_TimeTableData", arrCell);
-        //}
         public ActionResult SaveTimeTable(TimeTable oTimeTable, int iLayoutId)
         {
             if (oTimeTable != null)
@@ -257,74 +175,5 @@ namespace Focus8W.Controllers.Admin
         }
         #endregion
 
-        #region TimeTable
-        //public ActionResult TimeTable()
-        //{
-        //    //Registration[] arrRegisteredUsers = null;
-        //    TeacherDetails[] lstTeachers = null;
-        //    Subject[] arrSubject = null;
-        //    Cell[] arrCell = null;
-        //    TimeTable oTimeTable = new TimeTable();
-        //    int iClass = 1, iDate = 0;
-            
-        //    lstTeachers = oAdminDML.LoadActiveInActiveTeachers(true);
-        //    arrSubject = oAdminDML.LoadSubjects();
-        //    arrCell = oAdminDML.LoadTimeTableData(iClass, ref iDate);
-
-        //    //oTimeTable.Teacher = arrRegisteredUsers;
-        //    oTimeTable.Teachers = lstTeachers;
-        //    oTimeTable.Subjects = arrSubject;
-        //    oTimeTable.Class = iClass;
-        //    oTimeTable.CreatedDate = iDate;
-        //    oTimeTable.CellData = arrCell;
-
-        //    return PartialView("_TT", oTimeTable);
-        //}
-        //public ActionResult TimeTableData(int iClass = 1)
-        //{
-        //    Cell[] arrCell = null;
-        //    int iDate = 0;
-
-        //    arrCell = oAdminDML.LoadTimeTableData(iClass, ref iDate);
-        //    return PartialView("_TimeTableData", arrCell);
-        //}
-        //public ActionResult SaveTimeTable(TimeTable oTimeTable)
-        //{
-        //    if (oTimeTable != null)
-        //    {
-        //        oSaveStatus = oAdminDML.SaveTimeTable(oTimeTable);
-        //        return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json("Something wrong", JsonRequestBehavior.AllowGet);
-        //    }
-
-        //}
-        #endregion
-
-        #region Registration
-        //public ActionResult TeacherRegistration()
-        //{
-        //    DoubleIntValue oData = null;
-        //    oData = CommonMethod.LoadRegUser((int)Modules.Admin, (int)SubModule.Registration);
-        //    return PartialView("_Registration", oData);
-        //}
-
-        
-        //public ActionResult DeleteRegistration(int iRegId)
-        //{
-        //    if (iRegId > 0)
-        //    {
-        //        oSaveStatus = oAdminDML.DeleteRegistration(iRegId);
-        //        return Json(oSaveStatus, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        return Json("Something wrong", JsonRequestBehavior.AllowGet);
-        //    }
-        //}
-        
-        #endregion
     }
 }
