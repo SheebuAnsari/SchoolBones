@@ -29,7 +29,7 @@ namespace SchoolConfiguration
                 xmlnode1 = xmldoc.GetElementsByTagName("Server");
                 xmlnode2 = xmldoc.GetElementsByTagName("DbName");
                 xmlnode3 = xmldoc.GetElementsByTagName("IntegratedSecurity");
-                xmlnode4 = xmldoc.GetElementsByTagName("Uid");
+                xmlnode4 = xmldoc.GetElementsByTagName("UserId");
                 xmlnode5 = xmldoc.GetElementsByTagName("Password");
 
                 oDbInformation = new DbInformation();
