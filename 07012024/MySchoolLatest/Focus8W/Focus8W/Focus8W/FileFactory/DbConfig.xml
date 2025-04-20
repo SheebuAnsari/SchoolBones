@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<SqlServer>
-  <Server>FOCUS-DEV-20\MSSQL2019</Server>
-  <DbName>Madarsa</DbName>
-  <IntegratedSecurity>1</IntegratedSecurity>
-  <Uid>sa</Uid>
-  <Password>focus</Password>
-</SqlServer>
