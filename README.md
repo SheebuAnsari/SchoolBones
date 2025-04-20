@@ -1,2 +1,0 @@
-# SchoolBones
-SchoolBones project
